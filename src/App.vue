@@ -1,6 +1,6 @@
 <template>
   <section class="video">
-    <video autoplay muted loop id="myVideo" class="bg-video-main">
+    <video  muted loop id="myVideo" class="bg-video-main">
       <source src="vids/bg.mp4" type="video/mp4" />
     </video>
   </section>
@@ -97,9 +97,10 @@ body {
   width: 100%;
   height: 100%;
   opacity: 0.7;
+  object-fit: cover;
 }
 
-@media (min-aspect-ratio: 16/9) {
+/* @media (min-aspect-ratio: 16/9) {
   .bg-video-main {
     height: 300%;
     top: -100%;
@@ -111,7 +112,7 @@ body {
     width: 300%;
     left: -100%;
   }
-}
+} */
 
 .page {
   display: block;

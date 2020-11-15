@@ -1,5 +1,6 @@
 <template>
   <footer class="footer">
+    
     <ul class="footer__social-icons">
       <li class="footer__social-icon-item">
         <a
@@ -44,6 +45,8 @@ export default {
     position: -webkit-sticky;
     position: sticky;
     bottom: 0px;
+    pointer-events: none;
+    z-index: 3;
   }
   .footer__social-icons {
     margin-left: auto;
@@ -58,8 +61,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* width: 40px;
-    height: 40px; */
     padding: 11px;
     margin: 5px;
     list-style: none;
@@ -71,6 +72,7 @@ export default {
     transition: opacity 0.5s;
     text-align: center;
     color: white;
+    pointer-events: all;
   }
   
   .footer__social-icon-item:hover {
