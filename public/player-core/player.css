@@ -1,0 +1,14 @@
+/*Copyright Epic Games, Inc. All Rights Reserved.*/
+
+:root {
+	/*Using colour scheme https://color.adobe.com/TD-Colors---Option-3-color-theme-10394433/*/
+	--colour1:#2B3A42;
+	--colour2:#3F5765;
+	--colour3:#BDD4DE;
+	--colour4:#EFEFEF;
+	--colour5:#FF5035;
+	
+	--buttonFont:Helvetica;
+	--inputFont:Helvetica;
+}
+
