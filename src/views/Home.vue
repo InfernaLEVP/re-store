@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    
+
     <main class="page c-container">
       <!-- First page -->
       <section class="main-page">
@@ -13,9 +13,24 @@
           />
 
           <p class="main-page__subtitle">
-            Добро пожаловать на платформу будущего Digital Earth. Испытайте
-            новый уровень погружения в мир искусства и технологий.
+            Добро пожаловать на&nbsp;платформу будущего Digital Earth. Испытайте
+            новый уровень погружения в&nbsp;мир искусства и&nbsp;технологий.
           </p>
+
+          <!-- mobile front page logos -->
+          <div class="main-page__logos-mobile">
+            <img
+              src="../assets/restore_logo.svg"
+              alt="Логотип reStore"
+            />
+            <img
+              src="../assets/vinzavod_logo.svg"
+              alt="Логотип Винзавод"
+            />
+          </div>
+          
+          <!-- ./mobile front page logos -->
+
         </div>
 
         <a href="#gallery" class="main-page__gallery-btn">Галерея</a>
@@ -34,32 +49,32 @@
           <div class="slide">
             <p class="slider-about__text-paragraph">
               Платформа Digital Earth – это новый виртуальный формат музея
-              современного искусства. Геймифицированная среда дает
-              пользователю возможность опробовать уникальный маршрут для
-              знакомства с произведениями в жанрах цифрового искусства.
+              современного искусства. Геймифицированная среда дает пользователю
+              возможность опробовать уникальный маршрут для знакомства с
+              произведениями в жанрах цифрового искусства.
             </p>
             <p class="slider-about__text-paragraph">
               Платформа Digital Earth – это новый виртуальный формат музея
-              современного искусства. Геймифицированная среда дает
-              пользователю возможность опробовать уникальный маршрут для
-              знакомства с произведениями в жанрах цифрового искусства.
+              современного искусства. Геймифицированная среда дает пользователю
+              возможность опробовать уникальный маршрут для знакомства с
+              произведениями в жанрах цифрового искусства.
             </p>
             <p class="slider-about__text-paragraph">
               Платформа Digital Earth – это новый виртуальный формат музея
-              современного искусства. Геймифицированная среда дает
-              пользователю возможность опробовать уникальный маршрут для
-              знакомства с произведениями в жанрах цифрового искусства.
+              современного искусства. Геймифицированная среда дает пользователю
+              возможность опробовать уникальный маршрут для знакомства с
+              произведениями в жанрах цифрового искусства.
             </p>
           </div>
         </swiper-slide>
         <swiper-slide>
           <div class="slide">
             <p class="slider-about__text-paragraph">
-              Пространство музея представляет собой одновременно
-              футуристическое и вневременное здание сферической формы,
-              архитектура которого позволяет распределить концентрации
-              энергонапряжений и ощутить гармонию с природой и космосом.
-            </p>  
+              Пространство музея представляет собой одновременно футуристическое
+              и вневременное здание сферической формы, архитектура которого
+              позволяет распределить концентрации энергонапряжений и ощутить
+              гармонию с природой и космосом.
+            </p>
           </div>
         </swiper-slide>
         <swiper-slide>
@@ -71,7 +86,6 @@
             </p>
           </div>
         </swiper-slide>
-        
       </swiper>
       <!-- ./Swiper -->
 
@@ -98,19 +112,18 @@
               <h3 class="participants__subtitle">Грозный, Россия</h3>
               <p class="participants__body">
                 Фотограф Заурбек Цугаев Родился в Грозном. По образованию
-                преподаватель дошкольной педагогики и психологии. В 2012
-                году основал первый чеченский фото клуб LAMBERD. В период
-                2012-2016 организовал воркшопы с участием международно
-                известных фотографов, среди которых: Стенли Грин,Ольга
-                Краветс, Антон Ланге, Александр Гронский.
+                преподаватель дошкольной педагогики и психологии. В 2012 году
+                основал первый чеченский фото клуб LAMBERD. В период 2012-2016
+                организовал воркшопы с участием международно известных
+                фотографов, среди которых: Стенли Грин,Ольга Краветс, Антон
+                Ланге, Александр Гронский.
               </p>
               <p class="participants__body">
                 С 2018 г. член творческого союза художников России. Является
-                победителем всероссийского ежегодного проекта «Best of
-                Russia - 2017» и грантовой программы музея «Гараж» для
-                художников в сфере актуального искусства (2019/2020).Is the
-                deconstruction method promising in every case and where lies
-                its boundary?
+                победителем всероссийского ежегодного проекта «Best of Russia -
+                2017» и грантовой программы музея «Гараж» для художников в сфере
+                актуального искусства (2019/2020).Is the deconstruction method
+                promising in every case and where lies its boundary?
               </p>
               <a href="#" class="participants__social-link"></a>
             </div>
@@ -124,19 +137,18 @@
               <h3 class="participants__subtitle">Грозный, Россия</h3>
               <p class="participants__body">
                 Фотограф Заурбек Цугаев Родился в Грозном. По образованию
-                преподаватель дошкольной педагогики и психологии. В 2012
-                году основал первый чеченский фото клуб LAMBERD. В период
-                2012-2016 организовал воркшопы с участием международно
-                известных фотографов, среди которых: Стенли Грин,Ольга
-                Краветс, Антон Ланге, Александр Гронский.
+                преподаватель дошкольной педагогики и психологии. В 2012 году
+                основал первый чеченский фото клуб LAMBERD. В период 2012-2016
+                организовал воркшопы с участием международно известных
+                фотографов, среди которых: Стенли Грин,Ольга Краветс, Антон
+                Ланге, Александр Гронский.
               </p>
               <p class="participants__body">
                 С 2018 г. член творческого союза художников России. Является
-                победителем всероссийского ежегодного проекта «Best of
-                Russia - 2017» и грантовой программы музея «Гараж» для
-                художников в сфере актуального искусства (2019/2020).Is the
-                deconstruction method promising in every case and where lies
-                its boundary?
+                победителем всероссийского ежегодного проекта «Best of Russia -
+                2017» и грантовой программы музея «Гараж» для художников в сфере
+                актуального искусства (2019/2020).Is the deconstruction method
+                promising in every case and where lies its boundary?
               </p>
               <a href="#" class="participants__social-link"></a>
             </div>
@@ -150,73 +162,69 @@
               <h3 class="participants__subtitle">Грозный, Россия</h3>
               <p class="participants__body">
                 Фотограф Заурбек Цугаев Родился в Грозном. По образованию
-                преподаватель дошкольной педагогики и психологии. В 2012
-                году основал первый чеченский фото клуб LAMBERD. В период
-                2012-2016 организовал воркшопы с участием международно
-                известных фотографов, среди которых: Стенли Грин,Ольга
-                Краветс, Антон Ланге, Александр Гронский.
+                преподаватель дошкольной педагогики и психологии. В 2012 году
+                основал первый чеченский фото клуб LAMBERD. В период 2012-2016
+                организовал воркшопы с участием международно известных
+                фотографов, среди которых: Стенли Грин,Ольга Краветс, Антон
+                Ланге, Александр Гронский.
               </p>
               <p class="participants__body">
                 С 2018 г. член творческого союза художников России. Является
-                победителем всероссийского ежегодного проекта «Best of
-                Russia - 2017» и грантовой программы музея «Гараж» для
-                художников в сфере актуального искусства (2019/2020).Is the
-                deconstruction method promising in every case and where lies
-                its boundary?
+                победителем всероссийского ежегодного проекта «Best of Russia -
+                2017» и грантовой программы музея «Гараж» для художников в сфере
+                актуального искусства (2019/2020).Is the deconstruction method
+                promising in every case and where lies its boundary?
               </p>
               <a href="#" class="participants__social-link"></a>
             </div>
           </div>
         </swiper-slide>
-        
       </swiper>
       <!-- ./Swiper -->
-
     </main>
-    <Footer />
+    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Footer from '@/components/Footer.vue';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import SwiperCore, { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import 'swiper/components/pagination/pagination.scss';
-import Player from '@/components/Player.vue';
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
+import Player from "@/components/Player.vue";
 
 // install Swiper components
-SwiperCore.use([Navigation, Pagination]);  
+SwiperCore.use([Navigation, Pagination]);
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    Footer,
     Swiper,
     SwiperSlide,
-    Player
+    Player,
   },
   methods: {
     onSwiper(swiper) {
-      console.log(swiper)
+      console.log(swiper);
     },
     onSlideChange() {
-      console.log('slide change')
+      console.log("slide change");
     },
   },
-}
+};
 </script>
 
 <style scoped>
 .main-page {
   position: relative;
-  height: calc(100vh - 130px);
+  /* height: calc(100vh - 130px); */
+  height: 100vh;
   display: grid;
-  grid-template-rows: 80% 20%;
+  grid-template-rows: 93% 7%;
   justify-content: center;
   align-content: center;
 }
@@ -242,10 +250,27 @@ export default {
   margin-top: 60px;
   /* margin-bottom: 70px; */
 }
+.main-page__logos-mobile{
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.main-page__logos-mobile img{
+  max-width: 20%;
+}
+.main-page__logos-mobile img:first-child{
+  margin-right: 4rem;
+}
+@media (max-width: 992px){
+  .main-page__logos-mobile{
+    display: flex;
+  }
+}
+
 .main-page__gallery-btn {
   justify-self: center;
   align-self: end;
-  min-width: 150px;
+  min-width: 250px;
   text-align: center;
   margin-bottom: 35px;
   padding: 15px 50px;
@@ -280,19 +305,19 @@ export default {
 }
 
 /* Slider Customization */
-.slide{
+.slide {
   padding: 0 4rem;
 }
 .swiper-container {
   padding-bottom: 35px;
 }
-.swiper-pagination-bullet{
+.swiper-pagination-bullet {
   background: white;
 }
-.participants__item{
+.participants__item {
   padding: 0 5rem;
 }
-.participants__item img{
+.participants__item img {
   display: block;
   margin: 0 auto;
 }
