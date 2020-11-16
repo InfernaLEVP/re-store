@@ -11,7 +11,7 @@
         <swiper-slide>
           <div class="participants__item">
             <img
-              src="../assets/part-zaur.jpg"
+              src="../assets/background.jpg"
               alt="Заур Дадаев"
               class="participants__image"
             />
@@ -154,6 +154,7 @@ img{
   display: flex;
   align-items: center;
   color: white;
+  padding: 0 80px;
 }
 @media(max-width: 992px){
   .participants__item{
@@ -221,18 +222,20 @@ img{
 /*  */
 .participants__button{
     border-radius: 8px;
-    padding: 25px 110px;
+    padding: 15px 80px;
     text-transform: uppercase;
     transition: opacity .2s;
     position: absolute;
     bottom: 4%;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
     background-color: var(--primary-magenta);
 }
 @media(max-width: 992px){
   .participants__button{
-    position: relative;
+    position: absolute;
+    font-size: 18px;
+    padding: 15px 60px;
   }
 }
 

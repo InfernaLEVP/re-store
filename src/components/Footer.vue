@@ -7,6 +7,7 @@
         class="footer__logo-vinzavod"
       />
     </transition>
+    
     <ul class="footer__social-icons">
       <li class="footer__social-icon-item">
         <a

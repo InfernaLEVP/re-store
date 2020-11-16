@@ -7,7 +7,7 @@
         </div>
         
       </div>
-      <a href="/"  class="header__logo-vinzavod">
+      <router-link to="/"  class="header__logo-vinzavod">
         <transition name="fade" mode="out-in">
           <img v-if="isFront"
             src="../assets/vinzavod-l.svg"
@@ -18,7 +18,7 @@
             alt="Логотип Digital Earth"
           />
         </transition>
-      </a>
+      </router-link>
       
       <!--  -->
       <nav class="header__menu invisible">
@@ -169,6 +169,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  align-items: flex-start;
 }
 .header__gallery-btn {
   display: none;
@@ -179,8 +180,11 @@ export default {
   background-color: var(--primary-magenta)!important;
   color: white!important;
 }
+.header__logo-vinzavod.router-link-active{
+  background: transparent!important;
+}
 .header__logo-vinzavod {
-  width: 10%;
+  width: 140px;
   margin-right: 30px;
 }
 .header__menu {

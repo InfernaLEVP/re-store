@@ -6,7 +6,7 @@
   </section>
   <Header />
     <router-view v-slot="slotProps">
-      <transition name="fade" mode="out-in" :duration="{ enter: 500, leave: 800 }">
+      <transition name="fade" mode="out-in">
         <component :is="slotProps.Component" />
       </transition>
     </router-view>
@@ -142,10 +142,13 @@ body.lock{
 }
 
 /* Transitions */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .6s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.45s ease;
 }
-.fade-enter, .fade-leave-to{
+
+.fade-enter-from,
+.fade-leave-active {
   opacity: 0;
 }
 
@@ -159,7 +162,7 @@ body.lock{
 }
 @media(max-width: 992px){
   .swiper-button-next, .swiper-button-prev{
-    display: none;
+    display: none!important;
   }
 }
 .swiper-button-next{
