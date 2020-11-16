@@ -234,6 +234,7 @@ export default {
   cursor: pointer;
   transition: opacity 0.5s;
   text-align: center;
+  white-space: nowrap;
 }
 
 .header__menu-link:hover {

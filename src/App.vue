@@ -1,6 +1,6 @@
 <template>
   <section class="video">
-    <video  muted loop id="myVideo" class="bg-video-main">
+    <video autoplay muted loop id="myVideo" class="bg-video-main">
       <source src="vids/bg.mp4" type="video/mp4" />
     </video>
   </section>
