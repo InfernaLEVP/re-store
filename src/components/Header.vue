@@ -146,6 +146,7 @@ export default {
 .header {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   justify-content: space-between;
   padding-left: 4%;
   padding-right: 4%;
@@ -164,9 +165,11 @@ export default {
     max-height: 100vh;
   }
 }
-.header-wrap{
+.header-wrap {
   display: flex;
   flex-direction: row;
+  align-content: flex-start;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
 }
@@ -174,13 +177,13 @@ export default {
   display: none;
 }
 
-.router-link-active{
-  border: none!important;
+.router-link-active {
+  border: 1px solid var(--primary-magenta)!important;
   background-color: var(--primary-magenta)!important;
   color: white!important;
 }
 .header__logo-vinzavod {
-  width: 10%;
+  width: 150px;
   margin-right: 30px;
 }
 .header__menu {
@@ -246,7 +249,7 @@ export default {
 
 .header__logo-restore {
   width: 100px;
-  margin-left: 30px;
+  margin-left: 50px;
 }
 
 .burger-menu__social-icon-item,
