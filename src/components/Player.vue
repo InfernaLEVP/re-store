@@ -1,7 +1,12 @@
 <template>
   <div class="player c-container" id="gallery">
     <div id="playerUI">
-      <div id="player"></div>
+      <div id="player">
+				<div id="ck-fullscreen">
+					<img src="images/MaximiseToFullscreen.png" alt="Maximise to Fullscreen"
+						id="fullscreen-img" class="fullscreen-btn">
+				</div>
+			</div>
       <div id="overlay" class="overlay">
         <div id="overlayButton" onclick="onExpandOverlay_Click()">+</div>
         <div id="overlaySettings" style="display: block">
@@ -25,6 +30,13 @@
               <div class="tgl-slider"></div>
             </label>
           </div>
+					<div id="MatchViewportResolution">
+						<div class="settings-text">Match Viewport Resolution</div>
+						<label class="tgl-switch">
+							<input type="checkbox" id="match-viewport-res-tgl" class="tgl tgl-flat">
+							<div class="tgl-slider"></div>
+						</label>
+					</div>
           <div id="statsSetting">
             <div class="settings-text">Show Stats</div>
             <label class="tgl-switch">
@@ -47,7 +59,8 @@ export default {
   mounted(){
     console.log('mounted HELLO!');
     
-    load();// eslint-disable-line
+		load(); // eslint-disable-line
+		onParagonLoad(); // eslint-disable-line 
   }
 }
 </script>
@@ -62,6 +75,12 @@ body{
 }
 .player{
 	margin: 7rem 0;
+}
+#ck-fullscreen{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 9999;
 }
 #playerUI {
 	margin: 0 auto;
@@ -348,5 +367,22 @@ img#playButton{
 .tgl-flat:checked + .tgl-slider:after {
   left: 50%;
   background: var(--colour5);
+}
+
+/* iOS FullScreen hack */
+body #playerUI .iOS-full-screen{
+	width: 100vw!important;
+	height: 100vh!important;
+	max-width: 100vw!important;
+	max-height: 100vh!important;
+	position: fixed!important;
+	top: 0!important;
+	left: 0!important;
+}
+.iOS-full-screen-body{
+	overflow: hidden!important;
+}
+.iOS-full-screen-header{
+	display: none!important;
 }
 </style>
