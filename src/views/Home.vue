@@ -16,6 +16,21 @@
             Добро пожаловать на&nbsp;платформу будущего Digital Earth. Испытайте
             новый уровень погружения в&nbsp;мир искусства и&nbsp;технологий.
           </p>
+
+          <!-- mobile front page logos -->
+          <div class="main-page__logos-mobile">
+            <img
+              src="../assets/restore_logo.svg"
+              alt="Логотип reStore"
+            />
+            <img
+              src="../assets/vinzavod_logo.svg"
+              alt="Логотип Винзавод"
+            />
+          </div>
+          
+          <!-- ./mobile front page logos -->
+
         </div>
 
         <a href="#gallery" class="main-page__gallery-btn">Галерея</a>
@@ -167,13 +182,12 @@
       </swiper>
       <!-- ./Swiper -->
     </main>
-    <Footer />
+    
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Footer from "@/components/Footer.vue";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 
@@ -189,7 +203,6 @@ SwiperCore.use([Navigation, Pagination]);
 export default {
   name: "Home",
   components: {
-    Footer,
     Swiper,
     SwiperSlide,
     Player,
@@ -208,9 +221,10 @@ export default {
 <style scoped>
 .main-page {
   position: relative;
-  height: calc(100vh - 130px);
+  /* height: calc(100vh - 130px); */
+  height: 100vh;
   display: grid;
-  grid-template-rows: 80% 20%;
+  grid-template-rows: 93% 7%;
   justify-content: center;
   align-content: center;
 }
@@ -236,6 +250,23 @@ export default {
   margin-top: 60px;
   /* margin-bottom: 70px; */
 }
+.main-page__logos-mobile{
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.main-page__logos-mobile img{
+  max-width: 20%;
+}
+.main-page__logos-mobile img:first-child{
+  margin-right: 4rem;
+}
+@media (max-width: 992px){
+  .main-page__logos-mobile{
+    display: flex;
+  }
+}
+
 .main-page__gallery-btn {
   justify-self: center;
   align-self: end;

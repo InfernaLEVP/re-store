@@ -5,16 +5,23 @@
     </video>
   </section>
   <Header />
-  <router-view/>
+    <router-view v-slot="slotProps">
+      <transition name="fade" mode="out-in" :duration="{ enter: 500, leave: 800 }">
+        <component :is="slotProps.Component" />
+      </transition>
+    </router-view>
+  <Footer />
 </template>
 
 <script>
 // @ is an alias to /src
-import Header from '@/components/Header.vue'
+import Header from '@/components/Header.vue';
+import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
-    Header
+    Header,
+    Footer,
   }
 }
 </script>
@@ -71,9 +78,16 @@ body {
   background-color: var(--primary-black);
   font-family: "GoshaSans", "Haettenschweiler", "Arial Narrow Bold", sans-serif;
   font-weight: 300;
-  padding-top: 120px;
+  /* padding-top: 120px; */
 }
-
+@media (max-width: 992px){
+  body{
+    /* padding-top: 50px; */
+  }
+}
+h1{
+  color: white;
+}
 .c-container{
   width: 100%;
   max-width: 1240px;
@@ -126,4 +140,40 @@ body {
 body.lock{
   overflow: hidden;
 }
+
+/* Transitions */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .6s ease;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}
+
+/* Slider reStyle */
+.swiper-button-next, .swiper-button-prev{
+  width: 50px!important;
+  height: 50px!important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: containt;
+}
+@media(max-width: 992px){
+  .swiper-button-next, .swiper-button-prev{
+    display: none;
+  }
+}
+.swiper-button-next{
+  
+  background-image: url(../public/images/arr-right.svg);
+}
+.swiper-button-next:after{
+  content: ''!important;
+}
+.swiper-button-prev{
+  background-image: url(../public/images/arr-left.svg);
+}
+.swiper-button-prev:after{
+  content: ''!important;
+}
+
 </style>

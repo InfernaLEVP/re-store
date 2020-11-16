@@ -1,10 +1,12 @@
 <template>
   <footer class="footer">
-    <img
-      src="../assets/vinzavod_logo.svg"
-      alt="Логотип Винзавод"
-      class="footer__logo-vinzavod"
-    />
+    <transition name="fade" mode="out-in">
+      <img v-if="!isFront"
+        src="../assets/vinzavod_logo.svg"
+        alt="Логотип Винзавод"
+        class="footer__logo-vinzavod"
+      />
+    </transition>
     <ul class="footer__social-icons">
       <li class="footer__social-icon-item">
         <a
@@ -37,6 +39,11 @@
 <script>
 export default {
   name: "Footer",
+  computed: {
+    isFront(){
+      return this.$router.currentRoute.value.name == 'Home' ? true : false;
+    }
+  }
 };
 </script>
 
@@ -46,8 +53,8 @@ export default {
   flex-direction: row;
   align-items: flex-end;
   /* justify-content: end; */
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   bottom: 0px;
   pointer-events: none;
   z-index: 3;

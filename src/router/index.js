@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: "error"*/
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 
@@ -53,5 +54,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  document.querySelector('.header__burger-btn-wrapper').click();
+  next();
+});
 
 export default router
