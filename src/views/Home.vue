@@ -37,7 +37,7 @@
       </section>
 
       <!-- Swiper -->
-      <swiper
+      <!-- <swiper
         :slides-per-view="1"
         :space-between="50"
         navigation
@@ -86,13 +86,13 @@
             </p>
           </div>
         </swiper-slide>
-      </swiper>
+      </swiper> -->
       <!-- ./Swiper -->
 
       <Player />
 
       <!-- Swiper -->
-      <swiper
+      <!-- <swiper
         :slides-per-view="1"
         :space-between="50"
         navigation
@@ -179,7 +179,7 @@
             </div>
           </div>
         </swiper-slide>
-      </swiper>
+      </swiper> -->
       <!-- ./Swiper -->
     </main>
     
@@ -188,8 +188,8 @@
 
 <script>
 // @ is an alias to /src
-import SwiperCore, { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/vue";
+// import SwiperCore, { Navigation, Pagination } from "swiper";
+// import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
 import "swiper/swiper.scss";
@@ -198,22 +198,22 @@ import "swiper/components/pagination/pagination.scss";
 import Player from "@/components/Player.vue";
 
 // install Swiper components
-SwiperCore.use([Navigation, Pagination]);
+// SwiperCore.use([Navigation, Pagination]);
 
 export default {
   name: "Home",
   components: {
-    Swiper,
-    SwiperSlide,
+    // Swiper,
+    // SwiperSlide,
     Player,
   },
   methods: {
-    onSwiper(swiper) {
-      console.log(swiper);
-    },
-    onSlideChange() {
-      console.log("slide change");
-    },
+    // onSwiper(swiper) {
+    //   console.log(swiper);
+    // },
+    // onSlideChange() {
+    //   console.log("slide change");
+    // },
   },
 };
 </script>
