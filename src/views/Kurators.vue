@@ -17,8 +17,8 @@
               class="participants__image"
             />
             <div class="participants__bio-wrapper">
-              <h2 class="participants__name"></h2>
-              <h3 class="participants__location"></h3>
+              <h2 class="participants__name">{{slide.Name}}</h2>
+              <!-- <h3 class="participants__location"></h3> -->
               <div class="participants__body" v-html="parseContent(slide.Bio)">
               </div>
               <a href="#" class="participants__social-link"></a>

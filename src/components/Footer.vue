@@ -93,8 +93,8 @@ export default {
   text-align: center;
   color: white;
   pointer-events: all;
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
 }
 
 .footer__social-icon-item:hover {

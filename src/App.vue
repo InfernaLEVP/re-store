@@ -293,11 +293,13 @@ img{
 
 /*  */
 .participants__name{
+  font-size: 1.3em;
+  font-weight: 300;
   margin-bottom: 0px;
   text-transform: uppercase;
 }
 .participants__name > span{
-  text-transform: lowercase;
+  text-transform: none;
 }
 @media(max-width: 992px){
   
@@ -317,13 +319,14 @@ img{
 
 /*  */
 .participants__body{
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .participants__body p {
   margin: 0;
 }
 .participants__body span {
-  margin: 1em 0;
+  font-weight: 400;
+  margin: 1em 0 0 0;
   display: block;
 }
 @media(max-width: 992px){
