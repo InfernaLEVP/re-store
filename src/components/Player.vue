@@ -1,55 +1,81 @@
 <template>
-  <div class="player c-container" id="gallery">
-    <div id="playerUI">
-      <div id="player">
-				<div id="ck-fullscreen">
-					<img src="images/MaximiseToFullscreen.png" alt="Maximise to Fullscreen"
-						id="fullscreen-img" class="fullscreen-btn">
-				</div>
+  <div class="player">
+    <!--  -->
+
+		<div class="p-controls">
+			<div class="p-controls__title">
+				Выбери персонажа
 			</div>
-      <div id="overlay" class="overlay">
-        <div id="overlayButton" onclick="onExpandOverlay_Click()">+</div>
-        <div id="overlaySettings" style="display: block">
-          <div id="KickOthers">
-            <div class="settings-text">Kick all other players</div>
-            <label class="btn-overlay">
-              <input type="button" id="kick-other-players-button" class="overlay-button btn-flat" value="Kick">
-            </label>
-          </div>
-          <div id="FillWindow">
-            <div class="settings-text">Enlarge Display to Fill Window</div>
-            <label class="tgl-switch">
-              <input type="checkbox" id="enlarge-display-to-fill-window-tgl" class="tgl tgl-flat" checked>
-              <div class="tgl-slider"></div>
-            </label>
-          </div>
-          <div id="QualityControlOwnership">
-            <div class="settings-text">Quality control ownership</div>
-            <label class="tgl-switch">
-              <input type="checkbox" id="quality-control-ownership-tgl" class="tgl tgl-flat">
-              <div class="tgl-slider"></div>
-            </label>
-          </div>
-					<div id="MatchViewportResolution">
-						<div class="settings-text">Match Viewport Resolution</div>
-						<label class="tgl-switch">
-							<input type="checkbox" id="match-viewport-res-tgl" class="tgl tgl-flat">
-							<div class="tgl-slider"></div>
+			<button class="p-controls__button">
+				<img src="../assets/digita-face.png" alt="avatar image">
+			</button>
+			<button class="p-controls__button">
+				<img src="../assets/digita-face.png" alt="avatar image">
+			</button>
+			<button class="p-controls__button">
+				<img src="../assets/digita-face.png" alt="avatar image">
+			</button>
+		</div>
+
+
+		<div id="playerUI">
+			<div id="player">
+				<div class="regims">
+					<button id="720p" type="button" class="btn btn-secondary" onclick="setRes(1920,1080)">
+						<span>Landscape</span>
+					</button>
+
+					<button id="1080p" type="button" class="btn btn-secondary" onclick="setRes(1080, 1920)">
+						<span>Portrait</span>
+					</button>
+				</div>
+				
+			</div>
+			<div id="overlay" class="overlay">
+				<div id="overlayButton" onclick="onExpandOverlay_Click()">+</div>
+				<div id="overlaySettings" style="display: block">
+					<div id="KickOthers">
+						<div class="settings-text">Kick all other players</div>
+						<label class="btn-overlay">
+							<input type="button" id="kick-other-players-button" class="overlay-button btn-flat" value="Kick">
 						</label>
 					</div>
-          <div id="statsSetting">
-            <div class="settings-text">Show Stats</div>
-            <label class="tgl-switch">
-              <input type="checkbox" id="show-stats-tgl" class="tgl tgl-flat">
-              <div class="tgl-slider"></div>
-            </label>
-            <div id="statsContainer">
-              <div id="stats"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+					<div id="FillWindow">
+							<div class="settings-text">Enlarge Display to Fill Window</div>
+							<label class="tgl-switch">
+									<input type="checkbox" id="enlarge-display-to-fill-window-tgl" class="tgl tgl-flat" checked>
+									<div class="tgl-slider"></div>
+							</label>
+					</div>
+					<div id="QualityControlOwnership">
+							<div class="settings-text">Quality control ownership</div>
+							<label class="tgl-switch">
+									<input type="checkbox" id="quality-control-ownership-tgl" class="tgl tgl-flat">
+									<div class="tgl-slider"></div>
+							</label>
+					</div>
+					<div id="MatchViewportResolution">
+							<div class="settings-text">Match Viewport Resolution</div>
+							<label class="tgl-switch">
+									<input type="checkbox" id="match-viewport-res-tgl" class="tgl tgl-flat">
+									<div class="tgl-slider"></div>
+							</label>
+					</div>
+					<div id="statsSetting"> 
+						<div class="settings-text">Show Stats</div>
+						<label class="tgl-switch">
+							<input type="checkbox" id="show-stats-tgl" class="tgl tgl-flat">
+							<div class="tgl-slider"></div>
+						</label>
+						<div id="statsContainer">
+							<div id="stats"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--  -->
   </div>
 </template>
 
@@ -58,35 +84,142 @@ export default {
   name: 'Player',
   mounted(){
     console.log('mounted HELLO!');
-    
 		load(); // eslint-disable-line
-		onParagonLoad(); // eslint-disable-line 
+		// onParagonLoad(); // eslint-disable-line 
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+#player
 #playerUI * {
   cursor: auto!important;
 }
-body{
-    margin: 0px;
-}
-.player{
-	margin: 7rem 0;
-}
-#ck-fullscreen{
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	z-index: 9999;
-}
-#playerUI {
-	margin: 0 auto;
+#gallery{
+	/* height: calc(100vh - 130px); */
+	height: 98vh;
 	position: relative;
-	z-index: 10;
-	height: 60vh!important;
+}
+.player{	
+	display: flex;
+	align-items: flex-start;
+	max-height: 100vh;
+	overflow: hidden;
+	padding: 140px 4% 4% 4%;
+}
+@media(max-width: 992px){
+	.player{	
+		flex-direction: column;
+		padding: 80px 4% 4% 4%;
+	}
+}
+
+/*  */
+#playButton{
+	background-image: url(../assets/play-btn.svg);
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 104px;
+	height: 104px!important;
+	display: flex!important;
+	font-size: 0px!important;
+}
+
+/*  */
+.p-controls{
+	display: flex;
+	flex-direction: column;
+	margin-right: 30px;
+}
+@media(max-width: 992px){
+	.p-controls{	
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		margin-right: 0;
+	}
+}
+
+/*  */
+.p-controls__title{
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 24px;
+	display: flex;
+	align-items: center;
+	text-transform: uppercase;
+	color: #E3E3E3;
+	margin-bottom: 27px;
+}
+@media(max-width: 992px){
+	.p-controls__title{
+		width: 100%;
+		text-align: center;
+		justify-content: center;
+	}
+}
+
+/*  */
+.p-controls__button{
+	margin-bottom: 20px;
+	background: transparent;
+	border: 1px solid #949393;
+	border-radius: 8px;
+	width: 164px;
+	height: 164px;
+	cursor: pointer;
+}
+@media(max-width: 992px){
+	.p-controls__button{
+		width: 75px;
+		height: 75px;
+	}
+}
+
+
+/*  */
+/*  */
+/*  */
+#playerUI {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 100%;
+	max-height: calc(100vh - 140px - 4rem);
+	overflow: hidden;
+}
+#player{
+	width: 1280px;
+	height: 720px;
+	position: relative;
+	background-color: #000;
+	max-height: 100%;
+	/* max-width: 60%;
+	max-height: 60vh; */
+	
+}
+#player .regims{
+	position: absolute;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+}
+@media(max-width: 768px){
+	#player{
+		width: 1280px;
+		height: 720px;
+		position: relative;
+		background-color: #000;
+		/* max-width: 100%;
+		max-height: 60vh; */
+		
+	}
+}
+#playerUI *{
+	cursor: auto!important;
 }
 
 #statsContainer{
@@ -111,19 +244,8 @@ video{
 	position: absolute;
 	width: 100%;
 	height: 100%;
-}
-
-#player{
-	position: relative;
-	background-color: #000;
-	max-width: 60%!important;
-	max-height: 100%!important;
-	margin: 0 auto;
-}
-@media screen and (max-width: 992px){
-	#player{
-		max-width: 100%!important;
-	}
+	left: 0;
+	top: 0;
 }
 
 #overlay{
@@ -146,15 +268,16 @@ video{
 	
 	position: absolute;
 	padding: 4px;
-	top: 0;
-	right: 2%;
+	top: 140px;
+	right: 4%;
 	z-index: 100;
 	border: 2px solid var(--colour4);
 	border-top-width: 0px;
+	display: none;
 }
 
 .overlay {
-    background-color: var(--colour2);
+	background-color: var(--colour2);
 	font-family: var(--buttonFont);
 	font-weight: lighter;
 	color: var(--colour4);
@@ -193,7 +316,10 @@ video{
 	font-family: var(--inputFont);
 	width: 100%;
 	height: 100%;
-	background-color: rgba(100, 100, 100, 0.7);
+	/* background-color: rgba(100, 100, 100, 0.7); */
+	background-image: url(../assets/player-placeholder.jpg);
+	background-position: center;
+	background-size: cover;
 }
 
 /* State for element to be clickable */
@@ -217,6 +343,7 @@ video{
 #playButton{
 	display: inline-block;
 	height: auto;
+	cursor: pointer;
 }
 
 img#playButton{
@@ -295,6 +422,7 @@ img#playButton{
 .btn-flat:focus{
 	outline: none;
 }
+/*** Toggle Switch styles ***/
 .tgl-switch {
   float: right;
   vertical-align: middle;
@@ -368,21 +496,79 @@ img#playButton{
   left: 50%;
   background: var(--colour5);
 }
+/*** Toggle Switch styles ***/
+#ck-fullscreen {
+    width: var(--fullscreenButtonWidth);
+	height: var(--fullscreenButtonHeight);
+    background-color:#000;
+    float:right;
+    right:4px;
+    margin:2px;
+    padding:2px;
+    position: relative;
+}
 
-/* iOS FullScreen hack */
-body #playerUI .iOS-full-screen{
-	width: 100vw!important;
-	height: 100vh!important;
-	max-width: 100vw!important;
-	max-height: 100vh!important;
-	position: fixed!important;
-	top: 0!important;
-	left: 0!important;
+#ck-fullscreen:hover {
+	background-color:#434c53;
 }
-.iOS-full-screen-body{
-	overflow: hidden!important;
+
+.fullscreen-btn{
+	width: 100%;
+	height: 100%;
 }
-.iOS-full-screen-header{
-	display: none!important;
+
+/************************************************************/
+/* Player full screen css (different event for each browser */
+/************************************************************/
+#player:-webkit-full-screen {
+	width: 100%;
+	height: 100%;
+	left: 0%;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
+
+#player:-moz-full-screen {
+	width: 100%;
+	height: 100%;
+	left: 0%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#player:-ms-fullscreen {
+	width: 100%;
+	height: 100%;
+	left: 0%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#player:fullscreen {
+	width: 100%;
+	height: 100%;
+	left: 0%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#player.fullscreen {
+	width: 100%;
+	height: 100%;
+	left: 0%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+
+#player.fullscreen #configuration{
+	position: fixed;
+}
+
+#FillWindow{
+	/* display: none; */
+}
+
 </style>

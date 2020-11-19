@@ -1,5 +1,5 @@
 <template>
-  <header class="header c-container" :id="isFront">
+  <header class="header" :id="isFront">
     <div class="header-wrap">
       <div class="header__burger-btn-wrapper" @click="openCloseMenu">
         <div class="header__menu-burger">
@@ -10,10 +10,12 @@
       <router-link to="/"  class="header__logo-vinzavod">
         <transition name="fade" mode="out-in">
           <img v-if="isFront"
-            src="../assets/vinzavod-l.svg"
+            width="95"
+            src="../assets/vinzavod_logo.svg"
             alt="Логотип Винзавод"
           />
           <img v-else
+            width="180"
             src="../assets/digitalearth-l.svg"
             alt="Логотип Digital Earth"
           />
@@ -59,12 +61,17 @@
           </li>
         </ul>
       </nav>
-      <img
-        @click="routerCheck"
-        src="../assets/restore_logo.svg"
-        alt="Логотип reStore"
-        class="header__logo-restore"
-      />
+      <a href="https://www.re-store.ru/" target="_blank">
+        <img
+          src="../assets/restore_logo.svg"
+          alt="Логотип reStore"
+          class="header__logo-restore"
+        />
+      </a>
+      
+      <router-link to="/" class="header__logo-mobDigital-wrap">
+        <img src="../assets/digital_earth_logo_mobile.svg" alt="Логотип Digital Earth" class="header__logo-mobDigital">
+      </router-link>
     </div>
     
     <a href="#gallery" class="header__gallery-btn invisible">Галерея</a>
@@ -112,7 +119,7 @@ export default {
     this.bodyMain = document.body;
     this.burgerMenuWrapper = document.querySelector(".header__burger-btn-wrapper");
     this.galleryButton = document.querySelector(".header__gallery-btn") ;
-    document.querySelector('.header__burger-btn-wrapper').click();
+    // document.querySelector('.header__burger-btn-wrapper').click();
   },
   methods: {
     openCloseMenu() {
@@ -146,6 +153,7 @@ export default {
 .header {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   justify-content: space-between;
   padding-left: 4%;
   padding-right: 4%;
@@ -158,15 +166,24 @@ export default {
   right: 0;
   z-index: 50;
   padding-top: 35px;
+
+}
+@media(max-width: 960px){
+  .header{
+    /* background: #13100D; */
+  }
 }
 @media (max-width: 960px) and (orientation: landscape){
   .lock .header{
     max-height: 100vh;
   }
 }
-.header-wrap{
+
+.header-wrap {
   display: flex;
   flex-direction: row;
+  align-content: flex-start;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
   align-items: flex-start;
@@ -175,16 +192,17 @@ export default {
   display: none;
 }
 
-.router-link-active{
-  border: none!important;
+.router-link-active {
+  border: 1px solid var(--primary-magenta)!important;
   background-color: var(--primary-magenta)!important;
   color: white!important;
 }
 .header__logo-vinzavod.router-link-active{
   background: transparent!important;
+  border: none!important;
 }
 .header__logo-vinzavod {
-  width: 140px;
+  /* width: 140px; */
   margin-right: 30px;
 }
 .header__menu {
@@ -201,6 +219,7 @@ export default {
     max-width: 100%;
   }
 }
+
 .header__menu-items {
   width: 100%;
   display: flex;
@@ -212,7 +231,9 @@ export default {
   padding: 0;
   list-style: none;
   /* flex-wrap: wrap; */
+  white-space: nowrap;
 }
+
 .header__menu-item {
   width: 100%;
   margin: 0px 5px 10px 5px;
@@ -221,9 +242,7 @@ export default {
 .header__menu-link {
   text-decoration: none;
   color: var(--primary-white);
-
   width: 100%;
-
   display: block;
   list-style: none;
   border: solid 1px var(--primary-white);
@@ -237,20 +256,9 @@ export default {
   text-align: center;
 }
 
-.header__menu-link:hover {
-  border: solid 1px #e52e80;
-  opacity: 70%;
-}
-
-.header__menu-link:active {
-  border: solid 1px #e52e80;
-  background-color: #e52e80;
-  opacity: 70%;
-}
-
 .header__logo-restore {
   width: 100px;
-  margin-left: 30px;
+  margin-left: 50px;
 }
 
 .burger-menu__social-icon-item,
@@ -258,7 +266,14 @@ export default {
   display: none;
 }
 
-@media all and (max-width: 960px) {
+@media(max-width: 960px) {
+  .header__logo-mobDigital-wrap{
+    display: flex;
+  }
+}
+
+@media(max-width: 960px) {
+
   .header__logo-restore,
   .header__logo-vinzavod {
     display: none;
@@ -269,19 +284,23 @@ export default {
     flex-direction: row;
     position: relative;
   }
-  #true .header-wrap:after{
+  
+  #true .header__logo-mobDigital-wrap{
     display: none;
   }
-  .opened-header-wrap:after{
-    opacity: 0;
+  
+  #true .header__logo-mobDigital{
+    display: none;
   }
-  .header-wrap:after{
+  .opened-header-wrap .header__logo-mobDigital{
+    display: none;
+  }
+  .header__logo-mobDigital{
     position: absolute;
-    content: '';
     display: block;
     left: 90px;
     top: 0;
-    background-image: url(../assets/digital_earth_logo_mobile.svg);
+    /* background-image: url(../assets/digital_earth_logo_mobile.svg); */
     width: 70%;
     height: 55px;
     background-repeat: no-repeat;
@@ -464,7 +483,8 @@ export default {
     text-decoration: none;
   }
   .header__gallery-btn {
-    display: block;
+    /* display: block; */
+    display: none;
     /* position: fixed; */
     bottom: 35px;
     left:20%;
@@ -483,6 +503,9 @@ export default {
     text-decoration: none;
     transition: opacity 0.5s;
     margin: 0 auto;
+  }
+  .lock .header__gallery-btn {
+    display: block;
   }
 
 

@@ -1,153 +1,85 @@
 <template>
-  <div class="partners fp-slider">
-    <!-- Swiper -->
-    <swiper
-        :slides-per-view="1"
-        :space-between="50"
-        navigation
-      >
-        <swiper-slide>
-          <div class="partners__item partner">
-
-            <h2 class="partner__name">re:Store</h2>
-            
-            <div class="partner__body">
-              <p>
-                re:Store – самая большая сеть монобрендовых магазинов формата Apple Premium Reseller в Европе. Сейчас это более 86 розничных магазинов в крупнейших городах  России. В ассортименте представлена вся линейка продукции компании Apple, а также широкий выбор дополнительных устройств и аксессуаров.
-              </p>
-              <p>
-                Уже 15 лет re:Store руководствуется главным принципом — максимально удовлетворять потребности своих клиентов. Желание максимально соответствовать требованиям клиентов и выстраивать долгосрочные отношения за счет уровня обслуживания принесло свои плоды. За прошедшие годы клиентами re:Store стали сотни тысяч людей и десятки тысяч компаний.
-              </p>
-            </div>
-
-            <a href="#" class="participants__social-link"></a>
-
-          </div>
-        </swiper-slide>
-
-        <swiper-slide>
-          <div class="partners__item partner">
-
-            <h2 class="partner__name">re:Store</h2>
-            
-            <div class="partner__body">
-              <p>
-                re:Store – самая большая сеть монобрендовых магазинов формата Apple Premium Reseller в Европе. Сейчас это более 86 розничных магазинов в крупнейших городах  России. В ассортименте представлена вся линейка продукции компании Apple, а также широкий выбор дополнительных устройств и аксессуаров.
-              </p>
-              <p>
-                Уже 15 лет re:Store руководствуется главным принципом — максимально удовлетворять потребности своих клиентов. Желание максимально соответствовать требованиям клиентов и выстраивать долгосрочные отношения за счет уровня обслуживания принесло свои плоды. За прошедшие годы клиентами re:Store стали сотни тысяч людей и десятки тысяч компаний.
-              </p>
-            </div>
-
-            <a href="#" class="participants__social-link"></a>
-
-          </div>
-        </swiper-slide>
-    </swiper>
-    <!-- ./Swiper -->
+  <div class="participants fp-slider" id="partners">
+   
+    <div class="participants__item" v-for="slide in slides" :key="slide.name">
+      <div class="participants__bio-wrapper">
+        <h2 class="participants__name" v-html="slide.Name"></h2>
+        <h3 class="participants__location">{{slide.Slogan}}</h3>
+        <div class="participants__body" v-html="parseContent(slide.Text)">
+        </div>
+        <a href="#" class="participants__social-link"></a>
+      </div>
+    </div>
 
     <div class="participants__button">
-      <router-link to="#">Галерея</router-link>
+      <router-link to="/gallery">Галерея</router-link>
     </div>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import SwiperCore, { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/vue";
-
-// Import Swiper styles
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
-import "swiper/components/pagination/pagination.scss";
-// install Swiper components
-SwiperCore.use([Navigation, Pagination]);
 
 export default {
   name: "Partners",
   components: {
-    Swiper,
-    SwiperSlide,
+  },
+  data() {
+    return {
+      slides: []
+    };
+  },
+  mounted(){
+    fetch('/data/partners.json')
+      .then(response => response.json())
+      .then(data => {
+        this.slides = data;
+        console.log(data);
+      });
   },
   methods: {
+    parseContent(plainString){
+      let formattedText = '';
+
+        const rows = plainString.split(/\n/g);
+        // console.log(rows);
+        rows.forEach((item) => {
+          if(item !== ''){
+            formattedText += '<p>' + item + '</p>';
+          }
+        });
+      formattedText = formattedText.replace('<s>', '<span>');
+      formattedText = formattedText.replace('</s>', '</span>');
+      return formattedText;
+    },
+    
+  },
+  computed: {
   }
 };
 </script>
 
 <style scoped>
-img{
-  max-width: 100%;
-}
-
-.fp-slider{
-  padding: 4%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-@media(max-width: 992px){
-  .fp-slider{
-    padding-top: 85px;
-    padding-bottom: 85px;
-    position: relative;
+  #partners{
+    flex-direction: column;
   }
-}
 
-.partners{}
-
-/*  */
-.partners__item{}
-
-/*  */
-.partner{
-  color: white;
-  padding: 0 80px;
-}
-
-/*  */
-.partner__name{}
-
-/*  */
-.partner__body{}
-
-/*  */
-
-
-/*  */
-.participants__button{
-    border-radius: 8px;
-    padding: 15px 80px;
-    text-transform: uppercase;
-    transition: opacity .2s;
-    position: absolute;
-    bottom: 4%;
-    font-size: 18px;
-    font-weight: 500;
-    background-color: var(--primary-magenta);
-}
-@media(max-width: 992px){
-  .participants__button{
-    position: absolute;
-    font-size: 18px;
-    padding: 15px 60px;
+  /*  */
+  #partners .participants__item{
+    width: 60%;
+    margin: 0 auto;
+    padding: 0;
+    margin-bottom: 3rem;
   }
-}
-
-/*  */
-.participants__button a {
-  color: var(--primary-white);
-  text-decoration: none;
-}
-@media(max-width: 992px){
-  
-}
-
-/* Mobiles */
-@media(max-width: 992px){
-  .swiper-button-prev, .swiper-button-next{
-    display: none!important;
+  @media(max-width: 992px){
+    #partners .participants__item{
+      width: 100%;
+    }
   }
-}
+
+  /*  */
+  #partners .participants__bio-wrapper{
+    width: 100%;
+  }
 </style>

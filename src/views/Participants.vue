@@ -5,98 +5,42 @@
         :slides-per-view="1"
         :space-between="50"
         navigation
-        @swiper="onSwiper"
+        @swiper="setControlledSwiper"
         @slideChange="onSlideChange"
+        @init="initSwiper"
       >
-        <swiper-slide>
+        <swiper-slide v-for="slide in slides" :key="slide.Name">
           <div class="participants__item">
             <img
-              src="../assets/part-zaur.jpg"
-              alt="Заур Дадаев"
+              :src="slide.Photo"
+              :alt="slide.Name"
               class="participants__image"
             />
             <div class="participants__bio-wrapper">
-              <h2 class="participants__name">Алексей Рябов</h2>
-              <h3 class="participants__location">Москва, Россия <br> Художник, кандидат архитектуры</h3>
-              <div class="participants__body">
-                <p>
-                  Окончил Московский архитектурный институт (МАРХИ). Выпускник «Свободных мастерских» при Московском музее современного искусства (ММОМА).
-                </p>
-                <strong>Персональные выставки</strong>
-                <p>«…И васильки, и я, и тополя», галерея «Парк», Москва, 2020;</p>
-                <strong>Групповые выставки</strong>
-                <p>
-                  «Человек общающийся»,ММОМА на Петровке, Москва, 2020; <br>
-                  «Новый пейзаж/Без границ», музейно-выставочный комплекс ПКиО им. Л.Н.Толстого, Химки, 2020; <br>
-                  «Сколько лет камню», художественная акция в деревне Глебово Истринского района Московской области, Глебово, 2020; <br>
-                  «Нить», галерея «За школой», Москва, 2019.
-                </p>
+              <h2 class="participants__name">{{slide.Name}}</h2>
+              <h3 class="participants__location">{{slide.Location}} <br>{{slide.Occupation}}</h3>
+              <div class="participants__body" v-html="parseContent(slide.Bio)">
+                
               </div>
               <a href="#" class="participants__social-link"></a>
             </div>
           </div>
         </swiper-slide>
-        <swiper-slide>
-          <div class="participants__item">
-            <img
-              src="../assets/part-zaur.jpg"
-              alt="Заур Дадаев"
-              class="participants__image"
-            />
-            <div class="participants__bio-wrapper">
-              <h2 class="participants__name">Алексей Рябов</h2>
-              <h3 class="participants__location">Москва, Россия <br> Художник, кандидат архитектуры</h3>
-              <div class="participants__body">
-                <p>
-                  Окончил Московский архитектурный институт (МАРХИ). Выпускник «Свободных мастерских» при Московском музее современного искусства (ММОМА).
-                </p>
-                <strong>Персональные выставки</strong>
-                <p>«…И васильки, и я, и тополя», галерея «Парк», Москва, 2020;</p>
-                <strong>Групповые выставки</strong>
-                <p>
-                  «Человек общающийся»,ММОМА на Петровке, Москва, 2020; <br>
-                  «Новый пейзаж/Без границ», музейно-выставочный комплекс ПКиО им. Л.Н.Толстого, Химки, 2020; <br>
-                  «Сколько лет камню», художественная акция в деревне Глебово Истринского района Московской области, Глебово, 2020; <br>
-                  «Нить», галерея «За школой», Москва, 2019.
-                </p>
-              </div>
-              <a href="#" class="participants__social-link"></a>
-            </div>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="participants__item">
-            <img
-              src="../assets/part-zaur.jpg"
-              alt="Заур Дадаев"
-              class="participants__image"
-            />
-            <div class="participants__bio-wrapper">
-              <h2 class="participants__name">Алексей Рябов</h2>
-              <h3 class="participants__location">Москва, Россия <br> Художник, кандидат архитектуры</h3>
-              <div class="participants__body">
-                <p>
-                  Окончил Московский архитектурный институт (МАРХИ). Выпускник «Свободных мастерских» при Московском музее современного искусства (ММОМА).
-                </p>
-                <strong>Персональные выставки</strong>
-                <p>«…И васильки, и я, и тополя», галерея «Парк», Москва, 2020;</p>
-                <strong>Групповые выставки</strong>
-                <p>
-                  «Человек общающийся»,ММОМА на Петровке, Москва, 2020; <br>
-                  «Новый пейзаж/Без границ», музейно-выставочный комплекс ПКиО им. Л.Н.Толстого, Химки, 2020; <br>
-                  «Сколько лет камню», художественная акция в деревне Глебово Истринского района Московской области, Глебово, 2020; <br>
-                  «Нить», галерея «За школой», Москва, 2019.
-                </p>
-              </div>
-              <a href="#" class="participants__social-link"></a>
-            </div>
-          </div>
-        </swiper-slide>
+        
       </swiper>
-      <!-- ./Swiper -->
+    <!-- ./Swiper -->
 
     <div class="participants__button">
-      <router-link to="#">Галерея</router-link>
+      <router-link to="/gallery">Галерея</router-link>
+    </div>
+
+    <div class="mobile-paginator">
+      <div :class="['paginator-item ', index === 0 ? 'active-paginator-item' : '']" v-for="(dot, index) in dots" :key="dot.id"></div>
+    </div>
+
+    <div class="mobile-controls">
+      <div class="swiper-button-next" @click="next"></div>
+      <div class="swiper-button-prev" @click="prev"></div>
     </div>
   </div>
 </template>
@@ -105,11 +49,6 @@
 // @ is an alias to /src
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
-
-// Import Swiper styles
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
-import "swiper/components/pagination/pagination.scss";
 // install Swiper components
 SwiperCore.use([Navigation, Pagination]);
 
@@ -119,137 +58,69 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  data() {
+    return {
+      controlledSwiper: null,
+      // dots: [],
+      slides: [],
+    };
+  },
+  mounted(){
+    fetch('/data/participants.json')
+      .then(response => response.json())
+      .then(data => {
+        this.slides = data;
+        console.log(data);
+      });
+  },
   methods: {
-    onSwiper(swiper) {
-      console.log(swiper);
+    onSlideChange(swiper) {
+      const dots = document.querySelectorAll('.paginator-item');
+
+      dots.forEach((item) => {
+        item.classList.remove('active-paginator-item');
+      });
+      dots[swiper.realIndex].classList.add('active-paginator-item');
     },
-    onSlideChange() {
-      console.log("slide change");
+    setControlledSwiper(swiper) {
+      this.controlledSwiper = swiper;
     },
+    initSwiper(swiper){
+      for(let i = 0; i < swiper.slides.length; i++){
+        this.dots.push({ id: i });
+      }
+    },
+    next() {
+      this.controlledSwiper.slideNext();
+    },
+    prev() {
+      this.controlledSwiper.slidePrev();
+    },
+    parseContent(plainString){
+      let formattedText = '';
+
+        const rows = plainString.split(/\n/g);
+        // console.log(rows);
+        rows.forEach((item) => {
+          if(item !== ''){
+            formattedText += '<p>' + item + '</p>';
+          }
+        });
+      formattedText = formattedText.replace('<s>', '<span>');
+      formattedText = formattedText.replace('</s>', '</span>');
+      return formattedText;
+    }
+  },
+  computed: {
+    dots: function(){
+
+      let result = [];
+      for(let i = 0; i < this.slides.length; i++){
+        result.push({ id: i });
+      }
+      return result;
+      
+    }
   }
 };
 </script>
-
-<style scoped>
-img{
-  max-width: 100%;
-}
-.fp-slider{
-  padding: 4%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-@media(max-width: 992px){
-  .fp-slider{
-    padding-top: 85px;
-    position: relative;
-    flex-direction: column;
-  }
-}
-
-/*  */
-.participants__item{
-  display: flex;
-  align-items: center;
-  color: white;
-  padding: 0 80px;
-}
-@media(max-width: 992px){
-  .participants__item{
-    flex-direction: column;
-  }
-}
-
-/*  */
-.participants__image{
-  width: 35%;
-}
-@media(max-width: 992px){
-  .participants__image{
-  }
-}
-
-/*  */
-.participants__bio-wrapper{
-  width: 65%;
-  padding-left: 40px;
-}
-@media(max-width: 992px){
-  .participants__bio-wrapper{
-    width: 100%;
-    padding-left: 0px;
-  }
-}
-
-/*  */
-.participants__name{
-  margin-bottom: 0px;
-}
-@media(max-width: 992px){
-  
-}
-
-/*  */
-.participants__location{
-  margin-top: 0px;
-}
-@media(max-width: 992px){
-  
-}
-
-/*  */
-.participants__body{
-  margin-top: 40px;
-}
-@media(max-width: 992px){
-  
-}
-
-/*  */
-.participants__body strong{
-}
-
-/*  */
-.participants__body p{
-}
-
-/*  */
-.participants__social-link{
-}
-
-/*  */
-.participants__button{
-    border-radius: 8px;
-    padding: 15px 80px;
-    text-transform: uppercase;
-    transition: opacity .2s;
-    position: absolute;
-    bottom: 4%;
-    font-size: 18px;
-    font-weight: 500;
-    background-color: var(--primary-magenta);
-}
-@media(max-width: 992px){
-  .participants__button{
-    position: absolute;
-    font-size: 18px;
-    padding: 15px 60px;
-  }
-}
-
-/*  */
-.participants__button a {
-  color: var(--primary-white);
-  text-decoration: none;
-}
-@media(max-width: 992px){
-  
-}
-
-/* Mobiles */
-@media(max-width: 992px){
-
-}
-</style>

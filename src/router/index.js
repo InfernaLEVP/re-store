@@ -47,6 +47,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Partners.vue')
+  },
+  {
+    path: '/gallery',
+    name: 'Gallery',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Gallery.vue')
   }
 ]
 
@@ -56,7 +64,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.querySelector('.header__burger-btn-wrapper').click();
+  if(document.body.classList.contains('lock')){
+    document.querySelector('.header__burger-btn-wrapper').click();
+    document.body.classList.remove('lock');
+  }
   next();
 });
 

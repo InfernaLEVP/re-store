@@ -7,13 +7,32 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title><%= htmlWebpackPlugin.options.title %></title>
-  <link rel="stylesheet" href="./player-core/player.css">
-  <link rel="stylesheet" href="style.css">
+  
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
   <!-- Load player core scripts -->
   <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
   <script src="./player-core/webRtcPlayer.js"></script>
   <script src="./player-core/app.js"></script>
 
+    <style>
+      /*  */
+      /* Header Fix */
+      /*  */
+      .header__menu-link:hover {
+        border: solid 1px #e52e80;
+        opacity: 70%;
+      }
+
+      .header__menu-link:active {
+        border: solid 1px #e52e80;
+        background-color: #e52e80;
+        opacity: 70%;
+      }
+      /*  */
+      /* ./Header Fix */
+      /*  */
+    </style>
 </head>
 
 <body>

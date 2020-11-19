@@ -1,14 +1,16 @@
 <template>
   <footer class="footer">
     <transition name="fade" mode="out-in">
-      <img v-if="!isFront"
-        src="../assets/vinzavod_logo.svg"
-        alt="Логотип Винзавод"
-        class="footer__logo-vinzavod"
-      />
+      <a href="http://www.winzavod.ru/" target="_blank" v-if="!isFront && !isGallery" class="footer__logo-vinzavod">
+        <img
+          src="../assets/vinzavod_logo.svg"
+          alt="Логотип Винзавод"
+        />
+      </a>
+      
     </transition>
     
-    <ul class="footer__social-icons">
+    <ul class="footer__social-icons" v-show="!isGallery">
       <li class="footer__social-icon-item">
         <a
           href="https://www.facebook.com/restore.ru/"
@@ -43,6 +45,9 @@ export default {
   computed: {
     isFront(){
       return this.$router.currentRoute.value.name == 'Home' ? true : false;
+    },
+    isGallery(){
+      return this.$router.currentRoute.value.name == 'Gallery' ? true : false;
     }
   }
 };
@@ -88,6 +93,8 @@ export default {
   text-align: center;
   color: white;
   pointer-events: all;
+  width: 75px;
+  height: 75px;
 }
 
 .footer__social-icon-item:hover {
@@ -114,6 +121,7 @@ export default {
   margin-right: auto;
   /* margin-bottom: 35px; */
   padding: 0;
+  pointer-events: all;
   /* display: flex;
     flex-direction: row; */
 }
