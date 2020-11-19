@@ -4,7 +4,7 @@
     <div class="participants__item" v-for="slide in slides" :key="slide.name">
       <div class="participants__bio-wrapper">
         <h2 class="participants__name" v-html="slide.Name"></h2>
-        <h3 class="participants__location">{{slide.Slogan}}</h3>
+        <h3 class="participants__location"><a :href="slide.Slogan" target="_blank">{{slide.Slogan}}</a></h3>
         <div class="participants__body" v-html="parseContent(slide.Text)">
         </div>
         <a href="#" class="participants__social-link"></a>
@@ -81,5 +81,9 @@ export default {
   /*  */
   #partners .participants__bio-wrapper{
     width: 100%;
+  }
+  #partners .participants__location a{
+    color: inherit;
+    text-decoration: none;
   }
 </style>
