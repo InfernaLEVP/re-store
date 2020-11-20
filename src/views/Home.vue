@@ -54,13 +54,16 @@ export default {
   mounted(){
 
     window.addEventListener('scroll',  () => {
-      console.log(window.scrollY);
       if(window.scrollY > 190){
-        document.querySelector('.main-page__gallery-btn').style.opacity = 0;
-        document.querySelector('.footer').style.opacity = 0;
+        try{
+          document.querySelector('.main-page__gallery-btn').style.opacity = 0;
+          document.querySelector('.footer').style.opacity = 0;
+        } catch {console.log('err')} //eslint-disable no-empty
       }else{
-        document.querySelector('.main-page__gallery-btn').style.opacity = 1;
-        document.querySelector('.footer').style.opacity = 1;
+        try{
+          document.querySelector('.main-page__gallery-btn').style.opacity = 1;
+          document.querySelector('.footer').style.opacity = 1;
+        }catch {console.log('err')} //eslint-disable no-empty
       }
     }, false);
   }

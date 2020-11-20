@@ -6,21 +6,25 @@
 			<div class="p-controls__title">
 				Выбери персонажа
 			</div>
-			<button class="p-controls__button">
+			<button class="p-controls__button" onclick="onConfigButton(1,0)">
 				<img src="../assets/digita-face.png" alt="avatar image">
 			</button>
-			<button class="p-controls__button">
+			<button class="p-controls__button" onclick="onConfigButton(1,1)">
 				<img src="../assets/digita-face.png" alt="avatar image">
 			</button>
-			<button class="p-controls__button">
+			<button class="p-controls__button" onclick="onConfigButton(1,2)">
 				<img src="../assets/digita-face.png" alt="avatar image">
 			</button>
 		</div>
 
 
 		<div id="playerUI">
+			
 			<div id="player">
-				<div class="regims">
+				<div id="ck-fullscreen">
+					<img src="../assets/showFullScreenIcon.svg" alt="Maximise to Fullscreen" id="fullscreen-img" class="fullscreen-btn">
+				</div>
+				<!-- <div class="regims">
 					<button id="720p" type="button" class="btn btn-secondary" onclick="setRes(1920,1080)">
 						<span>Landscape</span>
 					</button>
@@ -28,7 +32,7 @@
 					<button id="1080p" type="button" class="btn btn-secondary" onclick="setRes(1080, 1920)">
 						<span>Portrait</span>
 					</button>
-				</div>
+				</div> -->
 				
 			</div>
 			<div id="overlay" class="overlay">
@@ -85,7 +89,7 @@ export default {
   mounted(){
     console.log('mounted HELLO!');
 		load(); // eslint-disable-line
-		// onParagonLoad(); // eslint-disable-line 
+		onParagonLoad(); // eslint-disable-line 
   }
 }
 </script>
@@ -117,7 +121,7 @@ export default {
 
 /*  */
 #playButton{
-	background-image: url(../assets/play-btn.svg);
+	/* background-image: url(../assets/play-btn.svg); */
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -190,6 +194,7 @@ export default {
 	max-width: 100%;
 	max-height: calc(100vh - 140px - 4rem);
 	overflow: hidden;
+	position: relative;
 }
 #player{
 	width: 1280px;
@@ -499,17 +504,36 @@ img#playButton{
 /*** Toggle Switch styles ***/
 #ck-fullscreen {
     width: var(--fullscreenButtonWidth);
-	height: var(--fullscreenButtonHeight);
-    background-color:#000;
-    float:right;
-    right:4px;
-    margin:2px;
-    padding:2px;
-    position: relative;
+		height: var(--fullscreenButtonHeight);
+    position: absolute;
+		z-index: 999;
+		top: 150px;
+    right: 50px;
+		cursor: pointer!important;
+}
+@media(max-width: 992px){
+	#ck-fullscreen {
+		top: 135px;
+    right: 15px;
+	}
+}
+#ck-fullscreen img{
+	cursor: pointer!important;
+	transition: all .3s;
+}
+#ck-fullscreen img:hover{
+	transform: scale(1.05);
+}
+#playButton{
+	cursor: pointer!important;
+	transition: all .3s;
+}
+#playButton:hover{
+	transform: scale(1.05);
 }
 
 #ck-fullscreen:hover {
-	background-color:#434c53;
+	/* background-color:#434c53; */
 }
 
 .fullscreen-btn{
@@ -570,5 +594,9 @@ img#playButton{
 #FillWindow{
 	/* display: none; */
 }
-
+.minimizeIt{
+	width: 75px!important;
+	height: 75px!important;
+	top: 25px!important;
+}
 </style>

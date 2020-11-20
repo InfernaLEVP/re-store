@@ -250,7 +250,7 @@ function showTextOverlay(text) {
 function showPlayOverlay() {
 	var img = document.createElement('img');
 	img.id = 'playButton';
-	img.src = '/images/Play.png';
+	img.src = 'images/play-btn.svg';
 	img.alt = 'Start Streaming';
 	setOverlay('clickableState', img, event => {
 		if (webRtcPlayerObj)
@@ -1493,6 +1493,15 @@ function updateKickButton(playersCount) {
 		kickButton.value = `Kick (${playersCount})`;
 }
 
+//
+function extractDomainName(hostname) {
+	var host = hostname;
+	host = host.replace(/^www\./i, "");
+	host = host.replace(/(\.[a-z]{2,3})*\.[a-z]{2,3}$/i, "");
+	return host;
+} 
+// 
+
 function connect() {
 	"use strict";
 
@@ -1503,10 +1512,9 @@ function connect() {
 		return;
 	}
 
-	ws = new WebSocket('http://localhost/'.replace('http://', 'ws://').replace('https://', 'wss://'));
+	ws = new WebSocket('http://192.168.1.6/'.replace('http://', 'ws://').replace('https://', 'wss://'));
 	// window.location.href
-	// 'http://193.106.174.13/'
-	// 'http://89.108.82.182/'
+	// http://79.143.64.66/
 	ws.onmessage = function (event) {
 		console.log(`<- SS: ${event.data}`);
 		var msg = JSON.parse(event.data);
@@ -1583,9 +1591,30 @@ window.addEventListener('resize', reportWindowSize);
 
 function reportWindowSize(event) {
 
-  setRes(window.innerWidth,window.innerHeight);
+	try{
+		const _p = document.querySelector('#playerUI');
+
+		const _w = document.querySelector('#playerUI').offsetWidth;
+		const _h = document.querySelector('#playerUI').offsetHeight;
+
+		if(_w === 0){
+			setRes(window.innerWidth,window.innerHeight);
+		}else{
+			console.log(document.querySelector('.player').offsetHeight);
+			_p.style.height = document.querySelector('.player').offsetHeight + 'px';
+			setRes(document.querySelector('#playerUI').offsetWidth,document.querySelector('#playerUI').offsetHeight);
+		}
+	}catch{}
+
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 }
 window.addEventListener('load', (event) => {
-	setRes(window.innerWidth,window.innerHeight);
+	try{
+		const _p = document.querySelector('#playerUI');
+		_p.style.height = document.querySelector('.player').offsetHeight + 'px';
+		setRes(document.querySelector('#playerUI').offsetWidth,document.querySelector('#playerUI').offsetHeight);
+	}catch{}
+	
 });

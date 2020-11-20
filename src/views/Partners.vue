@@ -35,7 +35,7 @@ export default {
       .then(response => response.json())
       .then(data => {
         this.slides = data;
-        console.log(data);
+        // console.log(data);
       });
   },
   methods: {

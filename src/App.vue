@@ -190,7 +190,7 @@ body.lock{
   border-radius: 50%;
   width: 10px;
   height: 10px;
-  margin: 0 5px;
+  margin: 0 9px;
   transition: all .3s;
 }
 .active-paginator-item{
@@ -205,6 +205,9 @@ body.lock{
   justify-content: center;
 }
 @media(max-width: 992px){
+  .paginator-item{
+    margin: 0 5px;
+  }
   .mobile-paginator{
     display: flex;
     bottom: calc(2% + 60px);
@@ -341,6 +344,7 @@ img{
 .participants__button{
     position: absolute;
     bottom: 4%;
+    z-index: 999;
 }
 @media(max-width: 992px){
   .participants__button{
@@ -402,5 +406,8 @@ img{
   --colour5: #FF5035;
   --buttonFont: Helvetica;
   --inputFont: Helvetica;
+}
+.link-from-gsheets{
+  color: inherit;
 }
 </style>

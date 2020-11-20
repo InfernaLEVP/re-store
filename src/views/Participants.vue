@@ -66,11 +66,13 @@ export default {
     };
   },
   mounted(){
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
     fetch('/data/participants.json')
       .then(response => response.json())
       .then(data => {
         this.slides = data;
-        console.log(data);
+        // console.log(data);
       });
   },
   methods: {
@@ -103,11 +105,12 @@ export default {
         // console.log(rows);
         rows.forEach((item) => {
           if(item !== ''){
-            formattedText += '<p>' + item + '</p>';
+            formattedText += '<p>' + item.replace('<s>', '<span>').replace('</s>', '</span>') + '</p>';
           }
         });
       formattedText = formattedText.replace('<s>', '<span>');
       formattedText = formattedText.replace('</s>', '</span>');
+      
       return formattedText;
     }
   },

@@ -1,28 +1,42 @@
 <template>
-  <div class="participants fp-slider">
+  <div class="participants fp-slider" id="about">
    
-    <div class="participants__item">
-      <div class="participants__bio-wrapper">
-        <h2 class="participants__name" >Концепция</h2>
-        <div class="participants__body">
-          <p>
-            "Digital Earth («Цифровая Земля») — название концепции, введенное в конце 90-ых бывшим вице-президентом США Эл Гором. Будущее в ней было представлено как пространство с открытым доступом к научной и культурной информации, а также знаниям, благодаря которым люди смогут лучше понять как нашу планету, так и влияние человеческой деятельности на нее.
-          </p>
-          <p>
-            Концепцию «Цифровой земли» связывают с понятием «геопространственной революции», в рамках которой действует универсальный семантический код, позволяющий ученым прогнозировать не только новую эру развития науки, но и будущее человечества в целом.
-          </p>
-          <p>
-            Антонио Джеуза, член экспертного совета Digital Earth, замечает: «Технология сама по себе не искусство. Это всего лишь инструмент для создания искусства. Однако цифровая парадигма является ядром сегодняшней жизни. Искусство, как мы все знаем, — это лучший способ понять мир, в котором мы живем. Художники, которые используют цифровые технологии в своих работах, являются самыми надежными переводчиками нашего времени. Digital Earth — это, прежде всего, вызов, ответ на вопрос, почему искусство все еще является лучшим способом понять нашу реальность?»."
-          </p>
+   <!-- Swiper -->
+      <swiper
+        :slides-per-view="1"
+        :space-between="50"
+        navigation
+        @swiper="setControlledSwiper"
+        @slideChange="onSlideChange"
+        @init="initSwiper"
+      >
+        <swiper-slide v-for="slide in slides" :key="slide.Name">
+          <div class="participants__item">
+            <div class="participants__bio-wrapper">
+              <h2 class="participants__name">{{slide.Title}}</h2>
+              <div class="participants__body" v-html="parseContent(slide.Text)">
 
-        </div>
-        <a href="#" class="participants__social-link"></a>
-      </div>
-    </div>
+              </div>
+              <a href="#" class="participants__social-link"></a>
+            </div>
+          </div>
+        </swiper-slide>
+        
+      </swiper>
+    <!-- ./Swiper -->
        
 
     <div class="participants__button">
       <router-link to="/gallery">Галерея</router-link>
+    </div>
+
+    <div class="mobile-paginator">
+      <div :class="['paginator-item ', index === 0 ? 'active-paginator-item' : '']" v-for="(dot, index) in dots" :key="dot.id"></div>
+    </div>
+
+    <div class="mobile-controls">
+      <div class="swiper-button-next" @click="next"></div>
+      <div class="swiper-button-prev" @click="prev"></div>
     </div>
 
   </div>
@@ -30,18 +44,80 @@
 
 <script>
 // @ is an alias to /src
+import SwiperCore, { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/vue";
+// install Swiper components
+SwiperCore.use([Navigation, Pagination]);
 
 export default {
   name: "About",
   components: {
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
+      controlledSwiper: null,
+      slides: [],
     };
   },
   mounted(){
+    fetch('/data/about.json')
+      .then(response => response.json())
+      .then(data => {
+        this.slides = data;
+        // console.log(data);
+      });
   },
   methods: {
+    onSlideChange(swiper) {
+      const dots = document.querySelectorAll('.paginator-item');
+
+      dots.forEach((item) => {
+        item.classList.remove('active-paginator-item');
+      });
+      dots[swiper.realIndex].classList.add('active-paginator-item');
+    },
+    setControlledSwiper(swiper) {
+      this.controlledSwiper = swiper;
+    },
+    initSwiper(swiper){
+      for(let i = 0; i < swiper.slides.length; i++){
+        this.dots.push({ id: i });
+      }
+    },
+    next() {
+      this.controlledSwiper.slideNext();
+    },
+    prev() {
+      this.controlledSwiper.slidePrev();
+    },
+    parseContent(plainString){
+      let formattedText = '';
+
+        const rows = plainString.split(/\n/g);
+        // console.log(rows);
+        rows.forEach((item) => {
+          if(item !== ''){
+            formattedText += '<p>' + item.replace('<s>', '<span>').replace('</s>', '</span>') + '</p>';
+          }
+        });
+      formattedText = formattedText.replace('<s>', '<span>');
+      formattedText = formattedText.replace('</s>', '</span>');
+
+      return formattedText;
+    }
+  },
+  computed: {
+    dots: function(){
+
+      let result = [];
+      for(let i = 0; i < this.slides.length; i++){
+        result.push({ id: i });
+      }
+      return result;
+      
+    }
   }
 };
 </script>
@@ -58,5 +134,9 @@ export default {
     width: 100%;
     padding-left: 0px;
   }
+}
+
+#about .participants__body p{
+  margin-bottom: 10px;
 }
 </style>

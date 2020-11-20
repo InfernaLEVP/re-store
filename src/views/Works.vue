@@ -1,5 +1,5 @@
 <template>
-  <div class="participants fp-slider">
+  <div class="participants fp-slider" id="works">
     <!-- Swiper -->
       <swiper
         :slides-per-view="1"
@@ -69,7 +69,7 @@ export default {
       .then(response => response.json())
       .then(data => {
         this.slides = data;
-        console.log(data);
+        // console.log(data);
       });
   },
   methods: {
@@ -119,3 +119,8 @@ export default {
 };
 </script>
 
+<style scoped>
+#works .participants__body p{
+  margin-bottom: 10px;
+}
+</style>
