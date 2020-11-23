@@ -1,5 +1,5 @@
 <template>
-  <div class="participants fp-slider">
+  <div class="participants fp-slider" id="part">
     <!-- Swiper -->
       <swiper
         :slides-per-view="1"
@@ -127,3 +127,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  #part .participants__image{
+    filter: grayscale(100%);
+  }
+</style>

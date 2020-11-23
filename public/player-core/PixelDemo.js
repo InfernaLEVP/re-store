@@ -62,13 +62,13 @@ function onConfigButton(category, item) {
     console.log(descriptor);
 }
 
-function setRes(width, height) {
-    let descriptor = {
-        Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
-    };
-    emitUIInteraction(descriptor);
-    console.log(descriptor);
-}
+// function setRes(width, height) {
+//     let descriptor = {
+//         Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
+//     };
+//     emitUIInteraction(descriptor);
+//     console.log(descriptor);
+// }
 
 function onConfigurationOne() {
     let descriptor = {
@@ -152,17 +152,17 @@ function onFullscreenChange(data)
 	}
 
 	// 
-	const _p = document.querySelector('#playerUI');
-	const _w = document.querySelector('#playerUI').offsetWidth;
-	const _h = document.querySelector('#playerUI').offsetHeight;
+	// const _p = document.querySelector('#playerUI');
+	// const _w = document.querySelector('#playerUI').offsetWidth;
+	// const _h = document.querySelector('#playerUI').offsetHeight;
 
-	if(_w === 0){
-		setRes(window.innerWidth,window.innerHeight);
-	}else{
-		console.log(document.querySelector('.player').offsetHeight);
-		_p.style.height = document.querySelector('.player').offsetHeight + 'px';
-		setRes(document.querySelector('#playerUI').offsetWidth,document.querySelector('#playerUI').offsetHeight);
-	}
+	// if(_w === 0){
+	// 	setRes(window.innerWidth,window.innerHeight);
+	// }else{
+	// 	console.log(document.querySelector('.player').offsetHeight);
+	// 	_p.style.height = document.querySelector('.player').offsetHeight + 'px';
+	// 	setRes(document.querySelector('#playerUI').offsetWidth,document.querySelector('#playerUI').offsetHeight);
+	// }
 	// 
 }
 
@@ -202,45 +202,59 @@ function enterFullscreen()
 		onFullscreenChange({});
 		onInPageFullscreen();
 	}
+	console.log('FullScreen enabled;');
+	document.querySelector('.header').style.display = 'none';
+	document.querySelector('.p-controls').style.display = 'none';
 }
 
 function exitFullscreen()
 {
-	var fullscreenDiv    = document.getElementById("player");
-	var textDivs    = document.getElementsByClassName("text");
-	var headerDiv    = document.getElementById("header-tbl");
-	var exitFullscreenFunc   = document.exitFullscreen;
+	window.scrollTo(0, 0);
+	setTimeout(() => {
 
-	if (!exitFullscreenFunc) {
-	  ['mozCancelFullScreen',
-	   'msExitFullscreen',
-	   'webkitExitFullscreen'].forEach(function (req) {
-	     exitFullscreenFunc = exitFullscreenFunc || document[req];
-	   });
-	}
+		//
+		var fullscreenDiv    = document.getElementById("player");
+		var textDivs    = document.getElementsByClassName("text");
+		var headerDiv    = document.getElementById("header-tbl");
+		var exitFullscreenFunc   = document.exitFullscreen;
 
-	if(exitFullscreenFunc) {
-		exitFullscreenFunc.call(document);
-	} else {
-		//No Fullscreen api so shrink video back from max window size
-		if(fullscreenDiv){
-			fullscreenDiv.classList.remove("fullscreen");
-			fullscreenDiv.classList.add("fixed-size");
-			fullscreenDiv.style.left = "";
+		if (!exitFullscreenFunc) {
+			['mozCancelFullScreen',
+			'msExitFullscreen',
+			'webkitExitFullscreen'].forEach(function (req) {
+				exitFullscreenFunc = exitFullscreenFunc || document[req];
+			});
 		}
 
-		if(textDivs){
-			for(let i=0; i<textDivs.length; i++){
-				textDivs[i].style.display = "block";
+		if(exitFullscreenFunc) {
+			exitFullscreenFunc.call(document);
+		} else {
+			//No Fullscreen api so shrink video back from max window size
+			if(fullscreenDiv){
+				fullscreenDiv.classList.remove("fullscreen");
+				fullscreenDiv.classList.add("fixed-size");
+				fullscreenDiv.style.left = "";
 			}
+
+			if(textDivs){
+				for(let i=0; i<textDivs.length; i++){
+					textDivs[i].style.display = "block";
+				}
+			}
+
+			if(headerDiv)
+				headerDiv.style.display = "table";
+
+			onFullscreenChange({});
+			onInPageFullscreen();
 		}
+		console.log('FullScreen Disabled!');
+		document.querySelector('.header').style.display = 'flex'; 
+		document.querySelector('.p-controls').style.display = 'flex';
+		// 
 
-		if(headerDiv)
-			headerDiv.style.display = "table";
-
-		onFullscreenChange({});
-		onInPageFullscreen();
-	}
+	}, 200);
+	
 }
 
 function onInPageFullscreen(){

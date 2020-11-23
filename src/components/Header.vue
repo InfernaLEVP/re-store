@@ -74,7 +74,7 @@
       </router-link>
     </div>
     
-    <a href="#gallery" class="header__gallery-btn invisible">Галерея</a>
+    <router-link to="/gallery" class="header__gallery-btn invisible">Галерея</router-link>
   </header>
 </template>
 
@@ -164,7 +164,7 @@ export default {
   top: 0px;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 9990;
   padding-top: 35px;
 
 }
@@ -204,6 +204,9 @@ export default {
 .header__logo-vinzavod {
   /* width: 140px; */
   margin-right: 30px;
+}
+.header__logo-vinzavod img{
+  max-width: 71px;
 }
 .header__menu {
   width: 100%;
@@ -271,6 +274,11 @@ export default {
     display: flex;
   }
 }
+@media(max-width: 340px){
+  .header__logo-mobDigital-wrap{
+    display: none;
+  }
+}
 
 @media(max-width: 960px) {
 
@@ -313,7 +321,7 @@ export default {
     overflow-y: auto;
     /* overflow: visible; */
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 12px;
   }
   .lock .header{
@@ -388,6 +396,13 @@ export default {
     justify-content: center;
     margin-bottom: 12px;
   }
+  @media(max-width: 340px){
+    .header__burger-btn-wrapper {
+      width: 30px;
+      height: 30px;
+      min-height: 30px;
+    }
+  }
 
   .header__burger-btn-wrapper.active-burger {
     border: none;
@@ -404,6 +419,13 @@ export default {
     transition: 0.3s;
     top: 0;
   }
+  @media(max-width: 340px){
+    .header__menu-burger {
+      width: 17px;
+      height: 11px;
+    }
+  }
+
   .header__menu-burger span {
     content: "";
     background-color: white;
@@ -413,6 +435,11 @@ export default {
     left: 0;
     bottom: 9px;
     transition: 0.3s;
+  }
+  @media(max-width: 340px){
+    .header__menu-burger span {
+      bottom: 4.6px;
+    }
   }
 
   .header__menu-burger::before,
@@ -506,8 +533,24 @@ export default {
   }
   .lock .header__gallery-btn {
     display: block;
+    margin-top: 12vh;
   }
 
 
+}
+
+@media(max-width: 345px){
+  .lock .header__gallery-btn {
+    display: block;
+    margin-top: 0;
+  }
+  .header__menu-burger.active:before {
+    top: 4.5px;
+    transform: rotate(45deg);
+  }
+  .header__menu-burger.active:after {
+    bottom: 4.5px;
+    transform: rotate(-45deg);
+  }
 }
 </style>

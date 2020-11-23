@@ -1,6 +1,6 @@
 <template>
   <section class="video">
-    <video autoplay playsinline muted loop id="myVideo" class="bg-video-main">
+    <video autoplay playsinline muted loop id="myVideo" poster="vids/poster.jpg" class="bg-video-main">
       <source src="vids/bg.mp4" type="video/mp4" />
     </video>
   </section>
@@ -216,6 +216,9 @@ body.lock{
 #true .header__logo-mobDigital-wrap{
   display: none;
 }
+.header__logo-mobDigital-wrap{
+  transition: opacity .3s;
+}
 
 /* Swiper */
 .swiper-wrapper{
@@ -244,6 +247,8 @@ img{
     padding-top: 85px;
     position: relative;
     padding-bottom: 95px;
+    min-height: 89vh;
+    max-height: 89vh;
     /* flex-direction: column; */
   }
 }
@@ -259,7 +264,7 @@ img{
   .participants__item{
     flex-direction: column;
     padding: 0px;
-    max-height: calc(100vh - 180px);
+    max-height: calc(89vh - 180px);
     overflow: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;   
@@ -267,11 +272,19 @@ img{
   .participants__item::-webkit-scrollbar {
     display: none;
   }
+  #gallery{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  #gallery::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /*  */
 .participants__image{
   width: 35%;
+  border-radius: 8px;
 }
 @media(max-width: 992px){
   .participants__image{
@@ -286,6 +299,11 @@ img{
 .participants__bio-wrapper{
   width: 65%;
   padding-left: 40px;
+}
+@media(min-width: 993px) and (max-width: 1300px){
+  .participants__bio-wrapper{
+    font-size: 14px;
+  }
 }
 @media(max-width: 992px){
   .participants__bio-wrapper{
@@ -306,6 +324,9 @@ img{
 }
 @media(max-width: 992px){
   
+}
+#about .participants__body p{
+  margin-bottom: 15px!important;
 }
 
 /*  */

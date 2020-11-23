@@ -68,6 +68,12 @@ router.beforeEach((to, from, next) => {
     document.querySelector('.header__burger-btn-wrapper').click();
     document.body.classList.remove('lock');
   }
+  if(to.name === 'Gallery'){
+    document.querySelector('#myVideo').pause();
+  }else{
+    document.querySelector('#myVideo').play();
+  }
+  
   next();
 });
 

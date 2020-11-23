@@ -31,25 +31,21 @@
 
         </div>
 
-        <a href="#player" class="main-page__gallery-btn">Галерея</a>
+        <router-link to="/gallery" class="main-page__gallery-btn">Галерея</router-link>
 
       </section>
 
     </main>
-    
-    <Player />
 
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Player from "@/components/Player.vue";
 
 export default {
   name: "Home",
   components: {
-    Player,
   },
   mounted(){
 
@@ -93,6 +89,7 @@ export default {
   .main-page {
     grid-template-rows: 93% 7%;
     padding-top: 65px;
+    height: 88vh;
   }
 }
 @media(max-width: 550px){
@@ -103,7 +100,8 @@ export default {
 @media(max-width: 340px){
   .main-page {
     grid-template-rows: 86% 14%;
-    padding-top: 25px;
+    padding-top: 35px;
+    height: 89vh;
   }
 }
 
@@ -120,14 +118,21 @@ export default {
 .main-page__logo-wrapper {
   display: flex;
   flex-direction: column;
-  margin: auto;
-  width: 50%;
+  /* margin: auto; */
+  margin: 0 auto;
+  width: 70%;
+  padding-top: 195px;
+}
+@media(max-width: 768px){
+  .main-page__logo-wrapper {
+    padding-top: 25px;
+  }
 }
 
 .main-page__digital-earth-log {
-  width: 80%;
+  width: 100%;
   height: auto;
-  margin: auto;
+  /* margin: auto; */
 }
 .main-page__subtitle {
   /* width: 50%; */
@@ -135,17 +140,24 @@ export default {
   font-weight: 300;
   font-size: 26px;
   line-height: 1.2;
-  margin-top: 60px;
+  /* margin-top: 60px; */
+  margin-top: 15vh;
   /* margin-bottom: 70px; */
+}
+@media(min-width: 992px) and (max-height: 870px){
+  .main-page__subtitle {
+    margin-top: 3vh;
+  }
 }
 @media(max-width: 768px){
   .main-page__subtitle {
-    font-size: 24px;
+    font-size: 20px;
+    margin-top: 7vh;
   }
 }
 @media(max-width: 350px){
   .main-page__subtitle {
-    font-size: 18px;
+    font-size: 15px;
   }
 }
 .main-page__logos-mobile{
@@ -170,7 +182,7 @@ export default {
   align-self: end;
   min-width: 250px;
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 40px;
   padding: 15px 50px;
   border-radius: 7px;
   outline: none;

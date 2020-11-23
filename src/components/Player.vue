@@ -1,8 +1,10 @@
 <template>
+	
   <div class="player">
     <!--  -->
 
 		<div class="p-controls">
+			<div id="flag" style="color:white;"></div>
 			<div class="p-controls__title">
 				Выбери персонажа
 			</div>
@@ -21,15 +23,15 @@
 		<div id="playerUI">
 			
 			<div id="player">
-				<div id="ck-fullscreen">
+				<div id="ck-fullscreen" style="">
 					<img src="../assets/showFullScreenIcon.svg" alt="Maximise to Fullscreen" id="fullscreen-img" class="fullscreen-btn">
 				</div>
 				<!-- <div class="regims">
-					<button id="720p" type="button" class="btn btn-secondary" onclick="setRes(1920,1080)">
+					<button id="720p" type="button" class="btn btn-secondary" onclick="setRes(1280,720)">
 						<span>Landscape</span>
 					</button>
 
-					<button id="1080p" type="button" class="btn btn-secondary" onclick="setRes(1080, 1920)">
+					<button id="720p" type="button" class="btn btn-secondary" onclick="setRes(720, 1280)">
 						<span>Portrait</span>
 					</button>
 				</div> -->
@@ -77,20 +79,91 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
 
 		<!--  -->
   </div>
+
 </template>
 
 <script>
 export default {
   name: 'Player',
   mounted(){
-    console.log('mounted HELLO!');
+
+		console.log('mounted HELLO!');
+		document.querySelector('#myVideo').pause();
 		load(); // eslint-disable-line
 		onParagonLoad(); // eslint-disable-line 
-  }
+
+		// Initial Player SetUp
+		this.initPlayer();
+		// ./Initial Player SetUp
+
+		document.querySelector('#gallery').addEventListener('scroll',  () => {
+			if(window.innerWidth > 100){
+				if(document.querySelector('#gallery').scrollTop > 10){
+					try{
+						document.querySelector('.header-wrap').style.display = 'none';
+					} catch {document.querySelector('#flag').innerText = 'err';} //eslint-disable no-empty
+				}else{
+					try{
+						document.querySelector('.header-wrap').style.display = 'flex';
+					}catch {console.log('err')} //eslint-disable no-empty
+				}
+			}
+      
+		}, true);
+		
+	},
+	methods: {
+		initPlayer: function () {
+			
+			window.prevOrientatio = 'qwe';
+			try{
+				// const _p = document.querySelector('#playerUI');
+				// _p.style.height = document.querySelector('.player').offsetHeight + 'px';
+				// if(window.innerWidth > 992){
+				// 	setRes(1280, 720);// eslint-disable-line 
+				// 	window.currentRes = 'xl';
+				// 	window.currentOrientation = 'l';
+				// }else{
+				// 	setRes(720, 1280);// eslint-disable-line 
+				// 	window.currentRes = 'xs';
+				// 	window.currentOrientation = 'h';
+				// }
+				
+			}catch{}// eslint-disable-line 
+
+			try{
+				document.querySelector('#playerUI').style.width = null;
+				document.querySelector('#playerUI').style.height = null;
+				const _w = document.querySelector('#playerUI').offsetWidth;// eslint-disable-line 
+				const _h = document.querySelector('#playerUI').offsetHeight;// eslint-disable-line 
+
+				if(window.innerWidth > 992){
+
+					if(document.querySelector('#player').clientHeight > Math.floor(_w *  0.5625)){
+						document.querySelector('#playerUI').style.height = Math.floor(_w *  0.5625) + 'px';
+					}else{
+						document.querySelector('#playerUI').style.width = (document.querySelector('#player').clientHeight * 1.7777) + 'px';
+						document.querySelector('#playerUI').style.height = document.querySelector('#player').clientHeight + 'px';
+					}
+
+				}else{
+
+					// document.querySelector('#playerUI').style.width = Math.floor(_h *  0.5625) + 'px';
+					document.querySelector('#playerUI').style.height = Math.floor(_w *  1.7777) + 'px';
+
+				}
+			}catch{}// eslint-disable-line 
+			
+		},
+		orientationSetUp: function () {
+			console.log('orient');
+		}
+	}
 }
 </script>
 
@@ -105,10 +178,17 @@ export default {
 	height: 98vh;
 	position: relative;
 }
+@media(max-width: 992px){
+	#gallery{
+		overflow: scroll;
+		-webkit-overflow-scroll: touch;
+	}
+}
 .player{	
 	display: flex;
 	align-items: flex-start;
 	max-height: 100vh;
+	min-height: 100vh;
 	overflow: hidden;
 	padding: 140px 4% 4% 4%;
 }
@@ -116,6 +196,16 @@ export default {
 	.player{	
 		flex-direction: column;
 		padding: 80px 4% 4% 4%;
+		/* max-height: 89vh; */
+		/* min-height: 89vh; */
+		max-height: initial;
+		min-height: initial;
+		padding-bottom: 11vh;
+	}
+}
+@media(max-width: 340px){
+	.player{
+		padding: 15px 4% 4% 4%;
 	}
 }
 
@@ -143,6 +233,9 @@ export default {
 		flex-wrap: wrap;
 		justify-content: space-around;
 		margin-right: 0;
+		margin: 0 auto;
+		margin-bottom: 35px;
+		position: relative;
 	}
 }
 
@@ -193,8 +286,30 @@ export default {
 	justify-content: center;
 	max-width: 100%;
 	max-height: calc(100vh - 140px - 4rem);
+	height: calc(100vh - 140px - 4rem);
 	overflow: hidden;
 	position: relative;
+	margin: 0 auto;
+}
+@media(max-width:992px){
+	#playerUI {
+		margin: 0 auto;
+		max-height: initial;
+	}
+}
+@media(max-width:992px) and (orientation: landscape){
+	.player{
+		max-height: initial;
+		padding-top: 20px;
+	}
+	#playerUI {
+		width: 100%!important;
+		height: initial;
+		max-height: initial;
+	}
+	.header__logo-mobDigital-wrap{
+		display: none!important;
+	}
 }
 #player{
 	width: 1280px;
@@ -507,14 +622,22 @@ img#playButton{
 		height: var(--fullscreenButtonHeight);
     position: absolute;
 		z-index: 999;
-		top: 150px;
+		top: 50px;
     right: 50px;
 		cursor: pointer!important;
 }
 @media(max-width: 992px){
 	#ck-fullscreen {
-		top: 135px;
+		top: 15px;
     right: 15px;
+	}
+}
+@media(max-width: 768px){
+	#ck-fullscreen {
+		width: 35px;
+		height: 35px;
+		min-height: 18px;
+		min-width: 18px;
 	}
 }
 #ck-fullscreen img{
@@ -595,8 +718,9 @@ img#playButton{
 	/* display: none; */
 }
 .minimizeIt{
-	width: 75px!important;
-	height: 75px!important;
+	width: 55px!important;
+	height: 55px!important;
 	top: 25px!important;
 }
 </style>
+

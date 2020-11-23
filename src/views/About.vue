@@ -124,19 +124,17 @@ export default {
 
 <style scoped>
 /*  */
-.participants__bio-wrapper{
+#about .participants__bio-wrapper{
   margin: 0 auto;
-  width: 65%;
-  padding-left: 40px;
+  width: 75%;
+  padding-left: 35px;
 }
 @media(max-width: 992px){
-  .participants__bio-wrapper{
+  #about .participants__bio-wrapper{
     width: 100%;
     padding-left: 0px;
   }
 }
 
-#about .participants__body p{
-  margin-bottom: 10px;
-}
+
 </style>

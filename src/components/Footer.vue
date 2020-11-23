@@ -97,10 +97,6 @@ export default {
   height: 50px;
 }
 
-.footer__social-icon-item:hover {
-  border: solid 1px #e52e80;
-  opacity: 70%;
-}
 
 .footer__social-icons-link {
   display: flex;

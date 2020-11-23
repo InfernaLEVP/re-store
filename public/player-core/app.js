@@ -8,6 +8,7 @@ var connect_on_load = true;
 var is_reconnection = false;
 var ws;
 const WS_OPEN_STATE = 1;
+window.currentRes = 'xl';
 
 var qualityControlOwnershipCheckBox;
 var matchViewportResolution;
@@ -255,7 +256,16 @@ function showPlayOverlay() {
 	setOverlay('clickableState', img, event => {
 		if (webRtcPlayerObj)
 			webRtcPlayerObj.video.play();
-
+			if(window.innerWidth > 992){
+				setRes(1280, 720);// eslint-disable-line 
+				window.currentRes = 'xl';
+				window.currentOrientation = 'l';
+			}else{
+				setRes(720, 1280);// eslint-disable-line 
+				window.currentRes = 'xs';
+				window.currentOrientation = 'h';
+			}
+			document.getElementById('match-viewport-res-tgl').click();
 		requestQualityControl();
 
 		showFreezeFrameOverlay();
@@ -1512,7 +1522,7 @@ function connect() {
 		return;
 	}
 
-	ws = new WebSocket('http://192.168.1.6/'.replace('http://', 'ws://').replace('https://', 'wss://'));
+	ws = new WebSocket('http://192.168.1.6:80/'.replace('http://', 'ws://').replace('https://', 'wss://'));
 	// window.location.href
 	// http://79.143.64.66/
 	ws.onmessage = function (event) {
@@ -1585,36 +1595,3 @@ function setRes(width, height) {
 	emitUIInteraction(descriptor);
 	console.log(descriptor);
 }
-
-// Resize Event
-window.addEventListener('resize', reportWindowSize);
-
-function reportWindowSize(event) {
-
-	try{
-		const _p = document.querySelector('#playerUI');
-
-		const _w = document.querySelector('#playerUI').offsetWidth;
-		const _h = document.querySelector('#playerUI').offsetHeight;
-
-		if(_w === 0){
-			setRes(window.innerWidth,window.innerHeight);
-		}else{
-			console.log(document.querySelector('.player').offsetHeight);
-			_p.style.height = document.querySelector('.player').offsetHeight + 'px';
-			setRes(document.querySelector('#playerUI').offsetWidth,document.querySelector('#playerUI').offsetHeight);
-		}
-	}catch{}
-
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-}
-window.addEventListener('load', (event) => {
-	try{
-		const _p = document.querySelector('#playerUI');
-		_p.style.height = document.querySelector('.player').offsetHeight + 'px';
-		setRes(document.querySelector('#playerUI').offsetWidth,document.querySelector('#playerUI').offsetHeight);
-	}catch{}
-	
-});
