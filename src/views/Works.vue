@@ -17,9 +17,11 @@
             />
             <div class="participants__bio-wrapper">
               <h2 class="participants__name">{{slide.Title}}</h2>
+              <h2 class="participants__type">{{slide.Type}}</h2>
               <h3 class="participants__location">{{slide.Author}}</h3>
               <div class="participants__body" v-html="parseContent(slide.Description)">
               </div>
+              <div class="participants__tech" v-html="parseTechno(slide.Tech_details)"></div>
               <a href="#" class="participants__social-link"></a>
             </div>
           </div>
@@ -103,6 +105,11 @@ export default {
       formattedText = formattedText.replace('<s>', '<span>');
       formattedText = formattedText.replace('</s>', '</span>');
       return formattedText;
+    },
+    parseTechno(plainString){
+      let formattedText = '';
+      formattedText += 'Технологии: ' + plainString;
+      return formattedText;
     }
   },
   computed: {
@@ -119,8 +126,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #works .participants__body p{
   margin-bottom: 10px;
+}
+#works .participants__type{
+  margin: 5px 0;
+  font-size: 18px;
+  font-weight: normal;
+}
+#works .participants__tech{
+  margin-top: 20px;
 }
 </style>

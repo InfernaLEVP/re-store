@@ -61,7 +61,7 @@
           </li>
         </ul>
       </nav>
-      <a href="https://www.re-store.ru/" target="_blank">
+      <a href="https://www.re-store.ru/" target="_blank" style="width:15%;display: flex;justify-content: flex-end;" :class="{ partner_: isPartners }">
         <img
           src="../assets/restore_logo.svg"
           alt="Логотип reStore"
@@ -138,6 +138,9 @@ export default {
   computed: {
     isFront(){
       return this.$router.currentRoute.value.name == 'Home' ? true : false;
+    },
+    isPartners(){
+      return this.$router.currentRoute.value.name == 'Partners' ? true : false;
     }
   }
 };
@@ -203,11 +206,27 @@ export default {
 }
 .header__logo-vinzavod {
   /* width: 140px; */
-  margin-right: 30px;
+  /* margin-right: 30px; */
+  width: 15%;
 }
-.header__logo-vinzavod img{
+#false .header__logo-vinzavod img{
+  max-width: 201px;
+}
+#true .header__logo-vinzavod img{
   max-width: 71px;
 }
+@media(max-width: 1200px){
+  #false .header__logo-vinzavod img{
+    max-width: 130px;
+  }
+  #true .header__logo-vinzavod img{
+    max-width: 71px;
+  }
+  .header__logo-vinzavod{
+    margin-right: 15px;
+  }
+}
+
 .header__menu {
   width: 100%;
   /* max-width: 1000px; */
@@ -215,7 +234,12 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 60%;
+  max-width: 75%;
+}
+@media(max-width: 1150px){
+  .header__menu {
+    max-width: 65%;
+  }
 }
 @media (max-width: 960px){
   .header__menu {
@@ -250,18 +274,32 @@ export default {
   list-style: none;
   border: solid 1px var(--primary-white);
   border-radius: 8px;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
+  padding: 0 20px;
+  line-height: 48px;
+  font-size: 20px;
+
   text-transform: uppercase;
-  font-size: 12px;
+  /* font-size: 12px; */
   font-weight: 400;
   cursor: pointer;
   transition: opacity 0.5s;
   text-align: center;
 }
+@media(max-width: 1250px){
+  .header__menu-link {
+    font-size: 15px;
+  }
+}
+@media(max-width: 1150px){
+  .header__menu-link {
+    font-size: 12px;
+  }
+}
 
 .header__logo-restore {
-  width: 100px;
-  margin-left: 50px;
+  /* width: 100px; */
+  /* margin-left: 50px; */
 }
 
 .burger-menu__social-icon-item,
@@ -378,6 +416,7 @@ export default {
     margin-bottom: 10px;
     text-align: left;
     border: 0;
+    line-height: initial;
   }
 
   .header__menu-link:hover {
@@ -552,5 +591,9 @@ export default {
     bottom: 4.5px;
     transform: rotate(-45deg);
   }
+}
+.partner_{
+  opacity: 0;
+  pointer-events: none;
 }
 </style>

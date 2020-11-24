@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <transition name="fade" mode="out-in">
-      <a href="http://www.winzavod.ru/" target="_blank" v-if="!isFront && !isGallery" class="footer__logo-vinzavod">
+      <a href="http://www.winzavod.ru/" target="_blank" v-if="!isFront && !isGallery && !isPartners" class="footer__logo-vinzavod">
         <img
           src="../assets/vinzavod_logo.svg"
           alt="Логотип Винзавод"
@@ -48,6 +48,9 @@ export default {
     },
     isGallery(){
       return this.$router.currentRoute.value.name == 'Gallery' ? true : false;
+    },
+    isPartners(){
+      return this.$router.currentRoute.value.name == 'Partners' ? true : false;
     }
   }
 };
@@ -96,7 +99,9 @@ export default {
   width: 50px;
   height: 50px;
 }
-
+.footer__social-icon-item:last-child{
+  margin-right: 0;
+}
 
 .footer__social-icons-link {
   display: flex;

@@ -9,13 +9,13 @@
 				Выбери персонажа
 			</div>
 			<button class="p-controls__button" onclick="onConfigButton(1,0)">
-				<img src="../assets/digita-face.png" alt="avatar image">
+				<img src="../assets/BotBlue_Preview.jpg" alt="avatar image">
 			</button>
 			<button class="p-controls__button" onclick="onConfigButton(1,1)">
-				<img src="../assets/digita-face.png" alt="avatar image">
+				<img src="../assets/BotWhite_Preview.jpg" alt="avatar image">
 			</button>
 			<button class="p-controls__button" onclick="onConfigButton(1,2)">
-				<img src="../assets/digita-face.png" alt="avatar image">
+				<img src="../assets/BotPink_Preview.jpg" alt="avatar image">
 			</button>
 		</div>
 
@@ -263,11 +263,20 @@ export default {
 .p-controls__button{
 	margin-bottom: 20px;
 	background: transparent;
-	border: 1px solid #949393;
+	/* border: 1px solid #949393; */
 	border-radius: 8px;
 	width: 164px;
 	height: 164px;
 	cursor: pointer;
+	border: none;
+	padding: 0;
+	outline: none!important;
+}
+.p-controls__button img{
+	border-radius: 8px;
+}
+.p-controls__button:active{
+	outline: none!important;
 }
 @media(max-width: 992px){
 	.p-controls__button{

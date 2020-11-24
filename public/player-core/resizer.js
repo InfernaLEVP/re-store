@@ -4,6 +4,10 @@
 
 window.addEventListener('resize', reportWindowSize);
 
+if(iOS() && window.innerWidth < 340){
+  console.log('IOS SE');
+}
+
 function reportWindowSize(event) {
 	console.log('resize!');
 
@@ -86,3 +90,16 @@ window.addEventListener('resize', function(event) {
   // event.preventDefault();
 });
 
+// =========
+function iOS() {
+  return [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ].includes(navigator.platform)
+  // iPad on iOS 13 detection
+  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}

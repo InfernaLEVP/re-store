@@ -2,9 +2,14 @@
   <div class="participants fp-slider" id="partners">
    
     <div class="participants__item" v-for="slide in slides" :key="slide.name">
+      <img
+        :src="slide.Photo"
+        :alt="slide.Name"
+        class="participants__image"
+      />
       <div class="participants__bio-wrapper">
-        <h2 class="participants__name" v-html="slide.Name"></h2>
-        <h3 class="participants__location"><a :href="slide.Slogan" target="_blank">{{slide.Slogan}}</a></h3>
+        <!-- <h2 class="participants__name" v-html="slide.Name"></h2> -->
+        <!-- <h3 class="participants__location"><a :href="slide.Slogan" target="_blank">{{slide.Slogan}}</a></h3> -->
         <div class="participants__body" v-html="parseContent(slide.Text)">
         </div>
         <a href="#" class="participants__social-link"></a>
@@ -35,7 +40,7 @@ export default {
       .then(response => response.json())
       .then(data => {
         this.slides = data;
-        // console.log(data);
+        // console.log(data);    
       });
   },
   methods: {
@@ -60,7 +65,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
   #partners{
     flex-direction: column;
   }
@@ -85,5 +90,21 @@ export default {
   #partners .participants__location a{
     color: inherit;
     text-decoration: none;
+  }
+  #partners .participants__name{
+    text-transform: none;
+  }
+  #partners .participants__image{
+    max-width: 131px;
+  }
+  #partners .participants__item:nth-child(2){
+    margin-top: 100px;
+  }
+  #partners .participants__item:nth-child(2) .participants__image{
+    max-width: 79px;
+    margin-right: 52px;
+  }
+  #partners .participants__body p{
+    font-size: 18px;
   }
 </style>
