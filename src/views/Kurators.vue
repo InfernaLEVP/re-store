@@ -1,5 +1,5 @@
 <template>
-  <div class="participants fp-slider">
+  <div class="participants fp-slider" id="exp">
     <!-- Swiper -->
       <swiper
         :slides-per-view="1"
@@ -124,3 +124,8 @@ export default {
 };
 </script>
 
+<style>
+  #exp .participants__body p{
+    margin-bottom: 15px;
+  }
+</style>

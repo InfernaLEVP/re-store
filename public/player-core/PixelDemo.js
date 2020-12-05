@@ -53,7 +53,10 @@ function onCharacterButton(category, item) {
     console.log(descriptor);
 }
 
-function onConfigButton(category, item) {
+function onConfigButton(category, item, event) {
+	console.log(event.target);
+	document.querySelector('.activeAvatar').classList.remove('activeAvatar');
+	event.target.classList.add('activeAvatar');
     let descriptor = {
         Category: category,
         Item: item
@@ -103,7 +106,7 @@ var isFullscreen = false;
 function onParagonLoad() {
 	styleAdditional = grabStyle;
 	inputOptions.controlScheme = ControlSchemeType.HoveringMouse;
-	inputOptions.fakeMouseWithTouches = true;
+	inputOptions.fakeMouseWithTouches = false;
 	styleWidth = 700;
 	styleHeight = 394;
 
@@ -181,10 +184,16 @@ function enterFullscreen()
 	   });
 	}
 
+	// 
+	// fullscreenFunc = undefined;
+	// 
 	if(fullscreenFunc){
 		fullscreenFunc.call(fullscreenDiv);
+		console.log('Fullscreen api');
+		window.FSS = true;
 	} else {
 		//No Fullscreen api so maximise video to window size
+		console.log('No Fullscreen api');
 		if(fullscreenDiv){
 			fullscreenDiv.classList.add("fullscreen");
 			fullscreenDiv.classList.remove("fixed-size");
@@ -203,14 +212,21 @@ function enterFullscreen()
 		onInPageFullscreen();
 	}
 	console.log('FullScreen enabled;');
-	document.querySelector('.header').style.display = 'none';
-	document.querySelector('.p-controls').style.display = 'none';
+
+	try{
+		document.querySelector('.header').style.display = 'none';
+		document.querySelector('.p-controls').style.display = 'none';
+	}catch{
+		document.querySelector('.header').style.display = 'none';
+		document.querySelector('.p-controls').style.display = 'none';
+	}
+
 }
 
 function exitFullscreen()
 {
 	window.scrollTo(0, 0);
-	setTimeout(() => {
+	// setTimeout(() => {
 
 		//
 		var fullscreenDiv    = document.getElementById("player");
@@ -226,8 +242,34 @@ function exitFullscreen()
 			});
 		}
 
+		//
+		// exitFullscreenFunc = undefined; 
+		// 
+
 		if(exitFullscreenFunc) {
 			exitFullscreenFunc.call(document);
+			window.FSS = false;
+
+			if(getOS() === 'Mac Os'){
+				console.log('MAC!');
+				if(window.x > 1000){
+					setRes(720,1280);
+				}else{
+					setRes(1440,900);
+				}
+			}else{
+				console.log('NOT MAC!');
+				if(window.x > 1000){
+					setRes(720,1280);
+				}else{
+					setRes(1280,720);
+				}
+			}
+			
+			
+			setTimeout(() => {
+				setRes(window.x, window.y)
+			}, 1650);
 		} else {
 			//No Fullscreen api so shrink video back from max window size
 			if(fullscreenDiv){
@@ -249,11 +291,18 @@ function exitFullscreen()
 			onInPageFullscreen();
 		}
 		console.log('FullScreen Disabled!');
-		document.querySelector('.header').style.display = 'flex'; 
-		document.querySelector('.p-controls').style.display = 'flex';
+
+		try{
+			document.querySelector('.header').style.display = 'flex'; 
+			document.querySelector('.p-controls').style.display = 'flex';
+		} catch {
+			document.querySelector('.header').style.display = 'flex'; 
+			document.querySelector('.p-controls').style.display = 'flex';
+		}
+		
 		// 
 
-	}, 200);
+	// }, 200);
 	
 }
 

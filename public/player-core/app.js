@@ -10,6 +10,30 @@ var ws;
 const WS_OPEN_STATE = 1;
 window.currentRes = 'xl';
 
+if(getOS() === 'Mac Os'){
+	window.x = 1440;
+	window.y = 900;
+}else{
+	window.x = 1280;
+	window.y = 720;
+}
+
+
+if(window.innerHeight < window.innerWidth){
+
+	if(getOS() === 'Mac Os'){
+		window.x = 1440;
+		window.y = 900;
+	}else{
+		window.x = 1280;
+		window.y = 720;
+	}
+	
+}else{
+	window.x = 720;
+	window.y = 1280;
+}
+
 var qualityControlOwnershipCheckBox;
 var matchViewportResolution;
 // TODO: Remove this - workaround because of bug causing UE to crash when switching resolutions too quickly
@@ -34,7 +58,7 @@ var freezeFrame = {
 // Optionally detect if the user is not interacting (AFK) and disconnect them.
 var afk = {
 	enabled: false,   // Set to true to enable the AFK system.
-	warnTimeout: 120,   // The time to elapse before warning the user they are inactive.
+	warnTimeout: 20,   // The time to elapse before warning the user they are inactive.
 	closeTimeout: 10,   // The time after the warning when we disconnect the user.
 
 	active: false,   // Whether the AFK system is currently looking for inactivity.
@@ -200,10 +224,12 @@ function sendQualityConsoleCommands(descriptor) {
 function setOverlay(htmlClass, htmlElement, onClickFunction) {
 	var videoPlayOverlay = document.getElementById('videoPlayOverlay');
 	if (!videoPlayOverlay) {
-		var playerDiv = document.getElementById('player');
-		videoPlayOverlay = document.createElement('div');
-		videoPlayOverlay.id = 'videoPlayOverlay';
-		playerDiv.appendChild(videoPlayOverlay);
+		try{
+			var playerDiv = document.getElementById('player');
+			videoPlayOverlay = document.createElement('div');
+			videoPlayOverlay.id = 'videoPlayOverlay';
+			playerDiv.appendChild(videoPlayOverlay);
+		}catch{}
 	}
 
 	// Remove existing html child elements so we can add the new one
@@ -216,7 +242,13 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 
 	if (onClickFunction) {
 		videoPlayOverlay.addEventListener('click', function onOverlayClick(event) {
+			window.setTrailerResolution();
 			onClickFunction(event);
+			if(iOS()){
+				console.log('IOS SE');
+				
+				resizePlayerStyle();
+			}
 			videoPlayOverlay.removeEventListener('click', onOverlayClick);
 		});
 	}
@@ -256,22 +288,29 @@ function showPlayOverlay() {
 	setOverlay('clickableState', img, event => {
 		if (webRtcPlayerObj)
 			webRtcPlayerObj.video.play();
+			window.res_w = window.screen.width * window.devicePixelRatio;
+			window.res_h = window.screen.height * window.devicePixelRatio;
 			if(window.innerWidth > 992){
-				setRes(1280, 720);// eslint-disable-line 
+				// setRes(window.res_w, window.res_h);// eslint-disable-line 
+				// setRes(1280, 720);
 				window.currentRes = 'xl';
 				window.currentOrientation = 'l';
 			}else{
-				setRes(720, 1280);// eslint-disable-line 
+				// setRes(window.res_w, window.res_h);// eslint-disable-line 
+				// setRes(720, 1280);
 				window.currentRes = 'xs';
 				window.currentOrientation = 'h';
 			}
 			document.getElementById('match-viewport-res-tgl').click();
+			setRes(window.x, window.y);
 		requestQualityControl();
 
 		showFreezeFrameOverlay();
 		hideOverlay();
 	});
 	shouldShowPlayOverlay = false;
+	// onConfigButton(1,4);
+	// document.querySelector('#videoPlayOverlay').click();
 }
 
 function updateAfkOverlayText() {
@@ -340,11 +379,11 @@ function resetAfkWarningTimer() {
 function createWebRtcOffer() {
 	if (webRtcPlayerObj) {
 		console.log('Creating offer');
-		showTextOverlay('Starting connection to server, please wait');
+		showTextOverlay('');
 		webRtcPlayerObj.createOffer();
 	} else {
 		console.log('WebRTC player not setup, cannot create offer');
-		showTextOverlay('Unable to setup video');
+		showTextOverlay('');
 	}
 }
 
@@ -403,7 +442,7 @@ function setupWebRtcPlayer(htmlElement, config) {
 
 	webRtcPlayerObj.onDataChannelConnected = function () {
 		if (ws && ws.readyState === WS_OPEN_STATE) {
-			showTextOverlay('WebRTC connected, waiting for video');
+			showTextOverlay('');
 		}
 	};
 
@@ -742,19 +781,49 @@ function updateVideoStreamSize() {
 	if (!matchViewportResolution) {
 		return;
 	}
-
+	
 	var now = new Date().getTime();
 	if (now - lastTimeResized > 1000) {
 		var playerElement = document.getElementById('player');
 		if (!playerElement)
 			return;
 
-		let descriptor = {
-			Console: 'setres ' + playerElement.clientWidth + 'x' + playerElement.clientHeight
-		};
-		emitUIInteraction(descriptor);
-		console.log(descriptor);
-		lastTimeResized = new Date().getTime();
+		let x = 1280;
+		let y = 720;
+		
+		if(window.innerHeight < window.innerWidth){
+			x = 1280;
+			y = 720;
+		}else{
+			x = 720;
+			y = 1280;
+		}
+		
+		if(window.x !== x){
+			let descriptor = {};
+			if(getOS() === 'Mac Os'){
+				console.log('MAC!');
+				descriptor = {
+					Console: 'setres ' + playerElement.clientWidth + 'x' + playerElement.clientHeight
+				};
+			}else{
+				console.log('NOT MAC!');
+				descriptor = {
+					Console: 'setres ' + x + 'x' + y
+				};
+			}
+			
+			emitUIInteraction(descriptor);
+			console.log(descriptor);
+			lastTimeResized = new Date().getTime();
+			window.x = x;
+			window.y = y;
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(updateVideoStreamSize, 1500);
+		}
+		clearTimeout(resizeTimeout);
+		resizeTimeout = setTimeout(updateVideoStreamSize, 1500);
+		
 	}
 	else {
 		console.log('Resizing too often - skipping');
@@ -1088,6 +1157,8 @@ function registerInputs(playerElement) {
 
 	registerMouseEnterAndLeaveEvents(playerElement);
 	registerTouchEvents(playerElement);
+	// window._t = new TouchController(playerElement);
+	// console.log(webRtcPlayerObj);
 }
 
 function createOnScreenKeyboardHelpers(htmlElement) {
@@ -1220,7 +1291,7 @@ function registerLockedMouseEvents(playerElement) {
 	};
 }
 
-// A hovering mouse works by the user clicking the mouse button when they want
+// A hovering mouse works by the user clicking the mouse button when they want 
 // the cursor to have an effect over the video. Otherwise the cursor just
 // passes over the browser.
 function registerHoveringMouseEvents(playerElement) {
@@ -1300,8 +1371,8 @@ function registerTouchEvents(playerElement) {
 		let byte = 2;
 		for (let t = 0; t < touches.length; t++) {
 			let touch = touches[t];
-			let x = touch.clientX - playerElement.offsetLeft;
-			let y = touch.clientY - playerElement.offsetTop;
+			let x = touch.clientX - playerElement.getBoundingClientRect().x;
+			let y = touch.clientY - playerElement.getBoundingClientRect().y;
 			if (print_inputs) {
 				console.log(`F${fingerIds[touch.identifier]}=(${x}, ${y})`);
 			}
@@ -1375,7 +1446,7 @@ function registerTouchEvents(playerElement) {
 			for (let t = 0; t < e.changedTouches.length; t++) {
 				rememberTouch(e.changedTouches[t]);
 			}
-
+		
 			if (print_inputs) {
 				console.log('touch start');
 			}
@@ -1424,7 +1495,7 @@ const SpecialKeyCodes = {
 	RightAlt: 255
 };
 
-// We want to be able to differentiate between left and right versions of some
+// We want to be able to differentiate between left and right versions of some 
 // keys.
 function getKeyCode(e) {
 	if (e.keyCode === SpecialKeyCodes.Shift && e.code === 'ShiftRight') return SpecialKeyCodes.RightShift;
@@ -1522,7 +1593,7 @@ function connect() {
 		return;
 	}
 
-	ws = new WebSocket('http://192.168.1.103:80/'.replace('http://', 'ws://').replace('https://', 'wss://'));
+	ws = new WebSocket(window.location.href.replace('http://', 'ws://').replace('https://', 'wss://'));
 	// window.location.href
 	// http://79.143.64.66/
 	ws.onmessage = function (event) {
@@ -1594,4 +1665,43 @@ function setRes(width, height) {
 	};
 	emitUIInteraction(descriptor);
 	console.log(descriptor);
+}
+
+// 
+// 
+// 
+window.setTrailerResolution = function (){
+	let con = '0';
+	if(window.innerHeight < window.innerWidth){
+		con = '1';
+	}else{
+		con = '2';
+	}
+	let descriptor = {
+		Connect: con,
+	};
+	emitUIInteraction(descriptor);
+}
+
+function getOS() {
+  var userAgent = window.navigator.userAgent,
+      platform = window.navigator.platform,
+      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+      os = null;
+
+  if (macosPlatforms.indexOf(platform) !== -1) {
+    os = 'Mac OS';
+  } else if (iosPlatforms.indexOf(platform) !== -1) {
+    os = 'iOS';
+  } else if (windowsPlatforms.indexOf(platform) !== -1) {
+    os = 'Windows';
+  } else if (/Android/.test(userAgent)) {
+    os = 'Android';
+  } else if (!os && /Linux/.test(platform)) {
+    os = 'Linux';
+  }
+
+  return os;
 }

@@ -22,6 +22,22 @@ export default {
   components: {
     Header,
     Footer,
+  },
+  mounted(){
+    console.log('APP MOUNTED');
+    
+    // window.addEventListener('beforeunload', function (e) {
+    //   e.preventDefault();
+    //   fetch(window.location.href + 'disconnected',{method: 'post'})
+    //     .then(response => console.log(response));
+    // });
+    // window.addEventListener('unload', function() {
+    //   fetch(window.location.href + 'disconnected',{method: 'post'})
+    //     .then(response => console.log(response));
+    // });
+
+    
+
   }
 }
 </script>
@@ -103,6 +119,16 @@ h1{
   left: 0;
   overflow: hidden;
   z-index: -100;
+}
+.video:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.6);
+  z-index: 55;
 }
 
 .bg-video-main {
@@ -254,6 +280,7 @@ img{
   display: flex;
   align-items: center;
   justify-content: center;
+  background: radial-gradient(circle, rgba(2,0,36,0) 0%, rgba(0,0,0,1) 0%, rgba(0,212,255,0) 90%);
 }
 @media(max-width: 992px){
   .fp-slider{
@@ -272,7 +299,9 @@ img{
   align-items: center;
   color: white;
   /* padding: 0 calc(80px + 4%); */
-  padding: 0 calc(80px + 7.5%) 0 calc(80px + 7.5%);
+  /* padding: 0 calc(80px + 7.5%) 0 calc(80px + 7.5%); */
+  max-width: 64%;
+  margin: 0 auto;
 }
 @media(max-width: 992px){
   .participants__item{
@@ -281,7 +310,8 @@ img{
     max-height: calc(89vh - 180px);
     overflow: scroll;
     -ms-overflow-style: none;
-    scrollbar-width: none;   
+    scrollbar-width: none;  
+    max-width: 100%; 
   }
   .participants__item::-webkit-scrollbar {
     display: none;
@@ -317,6 +347,24 @@ img{
 @media(min-width: 993px) and (max-width: 1300px){
   .participants__bio-wrapper{
     font-size: 14px;
+    max-height: 50vh;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;  
+  }
+  .participants__bio-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+}
+@media(max-height: 740px) and (min-width: 992px){
+  .participants__bio-wrapper{
+    max-height: 50vh;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+  }
+  .participants__bio-wrapper::-webkit-scrollbar {
+    display: none;
   }
 }
 @media(max-width: 992px){
@@ -346,8 +394,7 @@ img{
 /*  */
 .participants__location{
   margin-top: 0px;
-
-  font-weight: 300;
+  font-weight: normal;
   font-size: 16px;
   line-height: 146%;
 }
@@ -424,7 +471,7 @@ img{
 }
 @media(max-width: 992px){
   .mobile-controls{
-    display: flex;
+    display: none;
   }
 }
 /*  */

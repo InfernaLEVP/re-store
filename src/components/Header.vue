@@ -1,5 +1,6 @@
 <template>
   <header class="header" :id="isFront">
+    
     <div class="header-wrap">
       <div class="header__burger-btn-wrapper" @click="openCloseMenu">
         <div class="header__menu-burger">
@@ -7,20 +8,24 @@
         </div>
         
       </div>
-      <router-link to="/"  class="header__logo-vinzavod">
-        <transition name="fade" mode="out-in">
-          <img v-if="isFront"
+
+      <transition name="fade" mode="out-in">
+
+        <a href="http://www.winzavod.ru/" class="header__logo-vinzavod" target="_blank" v-if="isFront">
+          <img
             width="95"
             src="../assets/vinzavod_logo.svg"
             alt="Логотип Винзавод"
           />
-          <img v-else
+        </a>
+        <a href="http://digitalearth.re-store.ru/"  class="header__logo-vinzavod" v-else>
+          <img 
             width="180"
             src="../assets/digitalearth-l.svg"
             alt="Логотип Digital Earth"
           />
-        </transition>
-      </router-link>
+        </a>
+      </transition>
       
       <!--  -->
       <nav class="header__menu invisible">
@@ -61,7 +66,7 @@
           </li>
         </ul>
       </nav>
-      <a href="https://www.re-store.ru/" target="_blank" style="width:15%;display: flex;justify-content: flex-end;" :class="{ partner_: isPartners }">
+      <a href="https://www.re-store.ru/" target="_blank" style="width:19%;display: flex;justify-content: flex-end;" :class="{ partner_: isPartners }">
         <img
           src="../assets/restore_logo.svg"
           alt="Логотип reStore"
@@ -171,12 +176,12 @@ export default {
   padding-top: 35px;
 
 }
-@media(max-width: 960px){
+@media(max-width: 992px){
   .header{
     /* background: #13100D; */
   }
 }
-@media (max-width: 960px) and (orientation: landscape){
+@media (max-width: 992px) and (orientation: landscape){
   .lock .header{
     max-height: 100vh;
   }
@@ -207,10 +212,10 @@ export default {
 .header__logo-vinzavod {
   /* width: 140px; */
   /* margin-right: 30px; */
-  width: 15%;
+  width: 19%;
 }
 #false .header__logo-vinzavod img{
-  max-width: 201px;
+  max-width: 65%;
 }
 #true .header__logo-vinzavod img{
   max-width: 71px;
@@ -234,14 +239,14 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 75%;
+  max-width: 64%;
 }
 @media(max-width: 1150px){
   .header__menu {
-    max-width: 65%;
+    max-width: 64%;
   }
 }
-@media (max-width: 960px){
+@media (max-width: 992px){
   .header__menu {
     max-width: 100%;
   }
@@ -260,10 +265,18 @@ export default {
   /* flex-wrap: wrap; */
   white-space: nowrap;
 }
+@media(max-width: 1440px){
+}
 
 .header__menu-item {
   width: 100%;
   margin: 0px 5px 10px 5px;
+}
+.header__menu-item:first-child {
+  margin-left: 0;
+}
+.header__menu-item:last-child {
+  margin-left: 0;
 }
 
 .header__menu-link {
@@ -277,7 +290,7 @@ export default {
   /* padding: 10px 20px; */
   padding: 0 20px;
   line-height: 48px;
-  font-size: 20px;
+  font-size: 17px;
 
   text-transform: uppercase;
   /* font-size: 12px; */
@@ -286,9 +299,15 @@ export default {
   transition: opacity 0.5s;
   text-align: center;
 }
+@media(max-width: 1440px){
+  .header__menu-link {
+    padding: 0;
+    font-size: 15px;
+  }
+}
 @media(max-width: 1250px){
   .header__menu-link {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 @media(max-width: 1150px){
@@ -300,6 +319,7 @@ export default {
 .header__logo-restore {
   /* width: 100px; */
   /* margin-left: 50px; */
+  max-width: 85%;
 }
 
 .burger-menu__social-icon-item,
@@ -307,7 +327,7 @@ export default {
   display: none;
 }
 
-@media(max-width: 960px) {
+@media(max-width: 992px) {
   .header__logo-mobDigital-wrap{
     display: flex;
   }
@@ -318,7 +338,7 @@ export default {
   }
 }
 
-@media(max-width: 960px) {
+@media(max-width: 992px) {
 
   .header__logo-restore,
   .header__logo-vinzavod {
@@ -392,7 +412,7 @@ export default {
     right: 0;
     z-index: -1;
     transition: opacity 0.2s;
-    background-color: rgba(19, 16, 13, 0.85);
+    background-color: rgba(19, 16, 13, 0.95);
   }
   .header__menu-items {
     z-index: 60;

@@ -19,9 +19,10 @@
               <h2 class="participants__name">{{slide.Title}}</h2>
               <h2 class="participants__type">{{slide.Type}}</h2>
               <h3 class="participants__location">{{slide.Author}}</h3>
+              <div class="participants__tech" v-html="parseTechno(slide.Tech_details)"></div>
               <div class="participants__body" v-html="parseContent(slide.Description)">
               </div>
-              <div class="participants__tech" v-html="parseTechno(slide.Tech_details)"></div>
+              
               <a href="#" class="participants__social-link"></a>
             </div>
           </div>
@@ -128,7 +129,8 @@ export default {
 
 <style>
 #works .participants__body p{
-  margin-bottom: 10px;
+  margin-bottom: 0px;
+  text-indent: 20px;
 }
 #works .participants__type{
   margin: 5px 0;
@@ -136,6 +138,23 @@ export default {
   font-weight: normal;
 }
 #works .participants__tech{
-  margin-top: 20px;
+  margin: 5px 0;
+  font-weight: normal;
+}
+#works .participants__location{
+  margin: 5px 0;
+}
+#works .participants__name{
+  line-height: 1.1;
+}
+@media(max-width: 1440px) and (max-height: 810px){
+  .participants__bio-wrapper {
+    font-size: 12.5px;
+  }
+}
+@media(max-width: 1200px) and (max-height: 810px){
+  .participants__bio-wrapper {
+    font-size: 11.5px;
+  }
 }
 </style>

@@ -126,8 +126,8 @@ export default {
 /*  */
 #about .participants__bio-wrapper{
   margin: 0 auto;
-  width: 75%;
-  padding-left: 35px;
+  width: 100%;
+  padding-left: 0px;
 }
 @media(max-width: 992px){
   #about .participants__bio-wrapper{

@@ -69,9 +69,18 @@ router.beforeEach((to, from, next) => {
     document.body.classList.remove('lock');
   }
   if(to.name === 'Gallery'){
-    document.querySelector('#myVideo').pause();
+    try{
+      document.querySelector('#myVideo').pause();
+    }catch{}// eslint-disable-line
   }else{
-    document.querySelector('#myVideo').play();
+    try{
+      document.querySelector('#myVideo').play();
+    }catch{}// eslint-disable-line
+  }
+  if(from.name === 'Gallery'){
+    try{
+      ws.close();// eslint-disable-line  
+    }catch{}// eslint-disable-line
   }
   
   next();

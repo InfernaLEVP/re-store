@@ -4,12 +4,8 @@
 
 window.addEventListener('resize', reportWindowSize);
 
-if(iOS() && window.innerWidth < 340){
-  console.log('IOS SE');
-}
-
 function reportWindowSize(event) {
-	console.log('resize!');
+	// console.log('resize!');
 
   setTimeout(() => {
 
@@ -22,18 +18,25 @@ function reportWindowSize(event) {
   
       if(window.innerWidth > 992){
         if(window.currentRes === 'xs'){
-          setRes(1280, 720);
+          // setRes(window.res_w, window.res_h);
+          // setRes(1280, 720);
           window.currentRes = 'xl';
         }
-      
-        console.log(Math.floor(document.querySelector('.player').offsetHeight - 140 - (document.querySelector('.player').offsetHeight/100) * 4));
-        if(Math.floor(document.querySelector('.player').offsetHeight - 140 - (document.querySelector('.player').offsetHeight/100) * 4) > Math.floor(_w *  0.5625)){
+        
+        const availableH = Math.floor(document.querySelector('.player').offsetHeight 
+        - 140 
+        - (document.querySelector('.player').offsetHeight/100) 
+        * 4)
+        - (document.querySelector('.p-controls').offsetHeight + 25);
+
+        // console.log(availableH);
+        if(availableH > Math.floor(_w *  0.5625)){
           document.querySelector('#playerUI').style.height = Math.floor(_w *  0.5625) + 'px';
-          console.log('1');
+          // console.log('1');
         }else{
-          console.log('2');
-          document.querySelector('#playerUI').style.width = (Math.floor(document.querySelector('.player').offsetHeight - 140 - (document.querySelector('.player').offsetHeight/100) * 4) * 1.7777) + 'px';
-          document.querySelector('#playerUI').style.height = Math.floor(document.querySelector('.player').offsetHeight - 140 - (document.querySelector('.player').offsetHeight/100) * 4) + 'px';
+          // console.log('2');
+          document.querySelector('#playerUI').style.width = (availableH * 1.7777) + 'px';
+          document.querySelector('#playerUI').style.height = availableH + 'px';
         }
   
       }else{ // XS====================================
@@ -42,16 +45,17 @@ function reportWindowSize(event) {
           if(window.prevOrientation === 'not'){
             window.prevOrientation = 'qwe';
           }else{
-            setRes(720, 1280);
+            // setRes(window.res_w, window.res_h);
+            // setRes(720, 1280);
           }
           window.currentRes = 'xs';
 
         }else if(window.currentRes === 'xs'){
           if(window.prevOrientation === 'not'){
-            setRes(1280, 720);
+            // setRes(window.res_w, window.res_h);
             window.prevOrientation = 'qwe';
           }else{
-            setRes(720, 1280);
+            // setRes(window.res_w, window.res_h);
           }
         }
         

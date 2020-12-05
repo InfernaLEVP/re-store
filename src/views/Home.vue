@@ -130,15 +130,15 @@ export default {
 }
 
 .main-page__digital-earth-log {
-  width: 100%;
+  width: 85%;
   height: auto;
-  /* margin: auto; */
+  margin: 0 auto;
 }
 .main-page__subtitle {
   /* width: 50%; */
   text-align: center;
   font-weight: 300;
-  font-size: 26px;
+  font-size: 22px;
   line-height: 1.2;
   /* margin-top: 60px; */
   margin-top: 15vh;
@@ -151,13 +151,13 @@ export default {
 }
 @media(max-width: 768px){
   .main-page__subtitle {
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 7vh;
   }
 }
 @media(max-width: 350px){
   .main-page__subtitle {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 .main-page__logos-mobile{

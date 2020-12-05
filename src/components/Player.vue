@@ -5,16 +5,16 @@
 
 		<div class="p-controls">
 			<div id="flag" style="color:white;"></div>
-			<div class="p-controls__title">
+			<!-- <div class="p-controls__title">
 				Выбери персонажа
-			</div>
-			<button class="p-controls__button" onclick="onConfigButton(1,0)">
-				<img src="../assets/BotBlue_Preview.jpg" alt="avatar image">
+			</div> -->
+			<button class="p-controls__button" onclick="onConfigButton(1,0, event)">
+				<img class="activeAvatar" src="../assets/BotBlue_Preview.jpg" alt="avatar image">
 			</button>
-			<button class="p-controls__button" onclick="onConfigButton(1,1)">
+			<button class="p-controls__button" onclick="onConfigButton(1,1, event)">
 				<img src="../assets/BotWhite_Preview.jpg" alt="avatar image">
 			</button>
-			<button class="p-controls__button" onclick="onConfigButton(1,2)">
+			<button class="p-controls__button" onclick="onConfigButton(1,2, event)">
 				<img src="../assets/BotPink_Preview.jpg" alt="avatar image">
 			</button>
 		</div>
@@ -91,11 +91,21 @@
 export default {
   name: 'Player',
   mounted(){
-
+		window.gallery += 1;
 		console.log('mounted HELLO!');
-		document.querySelector('#myVideo').pause();
+
+		// document.querySelector('#myVideo').pause();
 		load(); // eslint-disable-line
-		onParagonLoad(); // eslint-disable-line 
+		onParagonLoad(); // eslint-disable-line
+
+		setTimeout(() => {
+			try{
+				if(window.gallery > 1){
+					document.querySelector('#videoPlayOverlay').click();
+				}
+			}catch{} 	// eslint-disable-line
+			
+		}, 1400)
 
 		// Initial Player SetUp
 		this.initPlayer();
@@ -121,20 +131,6 @@ export default {
 		initPlayer: function () {
 			
 			window.prevOrientatio = 'qwe';
-			try{
-				// const _p = document.querySelector('#playerUI');
-				// _p.style.height = document.querySelector('.player').offsetHeight + 'px';
-				// if(window.innerWidth > 992){
-				// 	setRes(1280, 720);// eslint-disable-line 
-				// 	window.currentRes = 'xl';
-				// 	window.currentOrientation = 'l';
-				// }else{
-				// 	setRes(720, 1280);// eslint-disable-line 
-				// 	window.currentRes = 'xs';
-				// 	window.currentOrientation = 'h';
-				// }
-				
-			}catch{}// eslint-disable-line 
 
 			try{
 				document.querySelector('#playerUI').style.width = null;
@@ -144,24 +140,41 @@ export default {
 
 				if(window.innerWidth > 992){
 
-					if(document.querySelector('#player').clientHeight > Math.floor(_w *  0.5625)){
+					const availableH = Math.floor(document.querySelector('.player').offsetHeight 
+					- 140 
+					- (document.querySelector('.player').offsetHeight/100) 
+					* 4)
+					- (document.querySelector('.p-controls').offsetHeight + 25);
+
+					if(availableH > Math.floor(_w *  0.5625)){
 						document.querySelector('#playerUI').style.height = Math.floor(_w *  0.5625) + 'px';
 					}else{
-						document.querySelector('#playerUI').style.width = (document.querySelector('#player').clientHeight * 1.7777) + 'px';
-						document.querySelector('#playerUI').style.height = document.querySelector('#player').clientHeight + 'px';
+						document.querySelector('#playerUI').style.width = (availableH * 1.7777) + 'px';
+						document.querySelector('#playerUI').style.height = availableH + 'px';
 					}
 
 				}else{
 
-					// document.querySelector('#playerUI').style.width = Math.floor(_h *  0.5625) + 'px';
-					document.querySelector('#playerUI').style.height = Math.floor(_w *  1.7777) + 'px';
+					if(window.currentOrientation === 'l'){
+            document.querySelector('#playerUI').style.height = Math.floor(_w *  0.5625) + 'px';
+          }else{
+            document.querySelector('#playerUI').style.height = Math.floor(_w *  1.7777) + 'px';
+          }
 
 				}
 			}catch{}// eslint-disable-line 
 			
+			let resolution = window.screen.width * window.devicePixelRatio + "x" + window.screen.height * window.devicePixelRatio;
+
+			document.querySelector('#flag').innerHTML = resolution + '<div>'+ document.querySelector('#playerUI').offsetWidth +' || ' + Math.floor(document.querySelector('#playerUI').offsetWidth *  1.7777).toString() +'</div>';
+			// setTimeout( () => { 
+			// 	document.querySelector('#videoPlayOverlay').style.backgroundImage = `../assets/placeholder-${this.randomInteger(1,6)}.jpg`;
+			// }, 150);
 		},
-		orientationSetUp: function () {
-			console.log('orient');
+		randomInteger(min, max) {
+			// получить случайное число от (min-0.5) до (max+0.5)
+			let rand = min - 0.5 + Math.random() * (max - min + 1);
+			return Math.round(rand);
 		}
 	}
 }
@@ -169,6 +182,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+#flag{
+	display: none;
+}
 #player
 #playerUI * {
   cursor: auto!important;
@@ -191,10 +207,12 @@ export default {
 	min-height: 100vh;
 	overflow: hidden;
 	padding: 140px 4% 4% 4%;
+
+	flex-direction: column-reverse;
 }
 @media(max-width: 992px){
 	.player{	
-		flex-direction: column;
+		flex-direction: column-reverse;
 		padding: 80px 4% 4% 4%;
 		/* max-height: 89vh; */
 		/* min-height: 89vh; */
@@ -224,18 +242,30 @@ export default {
 /*  */
 .p-controls{
 	display: flex;
-	flex-direction: column;
-	margin-right: 30px;
+	/* flex-direction: column; */
+	/* margin-right: 30px; */
+	width: 100%;
+	justify-content: center;
+	gap: 24px;
+	/* margin-top: 25px; */
+	transform: translateY(25px);
 }
 @media(max-width: 992px){
 	.p-controls{	
 		flex-direction: row;
-		flex-wrap: wrap;
+		/* flex-wrap: wrap; */
 		justify-content: space-around;
 		margin-right: 0;
 		margin: 0 auto;
-		margin-bottom: 35px;
+		/* margin-bottom: 15px; */
+		margin-top: 20px;
 		position: relative;
+		transform: none;
+	}
+}
+@media(max-width: 340px){
+	.p-controls{
+		padding-left: 30px;
 	}
 }
 
@@ -271,9 +301,18 @@ export default {
 	border: none;
 	padding: 0;
 	outline: none!important;
+	margin: 0 1rem;
 }
 .p-controls__button img{
 	border-radius: 8px;
+	opacity: 0.55;
+}
+.p-controls__button img.activeAvatar{
+	opacity: 1;
+	transition: all .3s;
+	border: 1px solid;
+	border-color: #e52e80!important;
+	padding: 5px;
 }
 .p-controls__button:active{
 	outline: none!important;
@@ -299,6 +338,7 @@ export default {
 	overflow: hidden;
 	position: relative;
 	margin: 0 auto;
+	border-radius: 8px;
 }
 @media(max-width:992px){
 	#playerUI {
@@ -446,7 +486,7 @@ video{
 	width: 100%;
 	height: 100%;
 	/* background-color: rgba(100, 100, 100, 0.7); */
-	background-image: url(../assets/player-placeholder.jpg);
+	background-image: url(../assets/placeholder-3.jpg);
 	background-position: center;
 	background-size: cover;
 }
@@ -627,12 +667,12 @@ img#playButton{
 }
 /*** Toggle Switch styles ***/
 #ck-fullscreen {
-    width: var(--fullscreenButtonWidth);
-		height: var(--fullscreenButtonHeight);
+    width: 50px;
+		height: 50px;
     position: absolute;
 		z-index: 999;
-		top: 50px;
-    right: 50px;
+		top: 25px;
+    right: 25px;
 		cursor: pointer!important;
 }
 @media(max-width: 992px){
@@ -730,6 +770,9 @@ img#playButton{
 	width: 55px!important;
 	height: 55px!important;
 	top: 25px!important;
+}
+#streamingVideo{
+	object-fit: contain;
 }
 </style>
 

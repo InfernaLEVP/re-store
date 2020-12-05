@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <transition name="fade" mode="out-in">
-      <a href="http://www.winzavod.ru/" target="_blank" v-if="!isFront && !isGallery && !isPartners" class="footer__logo-vinzavod">
+      <a href="http://www.winzavod.ru/" target="_blank" v-if="!isFront && !isPartners" class="footer__logo-vinzavod">
         <img
           src="../assets/vinzavod_logo.svg"
           alt="Логотип Винзавод"
@@ -10,7 +10,7 @@
       
     </transition>
     
-    <ul class="footer__social-icons" v-show="!isGallery">
+    <ul class="footer__social-icons">
       <li class="footer__social-icon-item">
         <a
           href="https://www.facebook.com/restore.ru/"
@@ -84,7 +84,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 11px;
+  /* padding: 11px; */
   margin: 5px;
   list-style: none;
   border: solid 1px white;
