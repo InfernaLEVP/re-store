@@ -212,7 +212,9 @@ function enterFullscreen()
 		onInPageFullscreen();
 	}
 	console.log('FullScreen enabled;');
-
+	if(getOS() === 'Mac OS'){
+		setRes(1440,900);
+	}
 	try{
 		document.querySelector('.header').style.display = 'none';
 		document.querySelector('.p-controls').style.display = 'none';
@@ -225,6 +227,13 @@ function enterFullscreen()
 
 function exitFullscreen()
 {
+	try{
+		document.querySelector('.header').style.display = 'flex'; 
+		document.querySelector('.p-controls').style.display = 'flex';
+	} catch {
+		document.querySelector('.header').style.display = 'flex'; 
+		document.querySelector('.p-controls').style.display = 'flex';
+	}
 	window.scrollTo(0, 0);
 	// setTimeout(() => {
 
