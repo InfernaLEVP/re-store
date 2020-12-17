@@ -187,6 +187,12 @@ body.lock{
   background-repeat: no-repeat;
   background-size: containt;
 }
+@media(max-width: 1500px){
+  .swiper-button-next, .swiper-button-prev{
+    width: 40px!important;
+    height: 40px!important;
+  }
+}
 
 .swiper-button-next, .swiper-container-rtl .swiper-button-prev{
   right: 0;
@@ -453,7 +459,12 @@ img{
 .participants__button a:hover{
   opacity: 0.7;
 }
-
+@media(max-width: 1500px){
+  .participants__button a {
+    font-size: 16px;
+    padding: 11px 60px;
+  }
+}
 @media(max-width: 992px){
   .participants__button a {
     font-size: 18px;
@@ -491,5 +502,11 @@ img{
 }
 .link-from-gsheets{
   color: inherit;
+}
+
+.lections a{
+    display: block;
+    color: white;
+    margin-top: 10px;
 }
 </style>

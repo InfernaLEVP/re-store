@@ -1,13 +1,20 @@
 <template>
   <footer class="footer">
     <transition name="fade" mode="out-in">
-      <a href="http://www.winzavod.ru/" target="_blank" v-if="!isFront && !isPartners" class="footer__logo-vinzavod">
-        <img
-          src="../assets/vinzavod_logo.svg"
-          alt="Логотип Винзавод"
-        />
-      </a>
-      
+      <div v-if="!isFront && !isPartners" class="footer__logo-left" >
+        <a href="http://www.winzavod.ru/" target="_blank" class="footer__logo-vinzavod">
+          <img
+            src="../assets/vinzavod_logo.svg"
+            alt="Логотип Винзавод"
+          />
+        </a>
+        <a href="https://www.afisha.ru/" target="_blank" class="footer__logo-vinzavod afisha">
+          <img
+            src="../assets/Logo-Afisha.png"
+            alt="Логотип Винзавод"
+          />
+        </a>
+      </div>
     </transition>
     
     <ul class="footer__social-icons">
@@ -99,6 +106,13 @@ export default {
   width: 50px;
   height: 50px;
 }
+@media(max-width: 1500px){
+  .footer__social-icon-item{
+    width: 40px;
+    height: 40px;
+        font-size: 10px;
+  }
+}
 .footer__social-icon-item:last-child{
   margin-right: 0;
 }
@@ -118,15 +132,24 @@ export default {
 
 .footer__logo-vinzavod {
   width: 75px;
-  margin-left: 4%;
   margin-right: auto;
   /* margin-bottom: 35px; */
   padding: 0;
   pointer-events: all;
   /* display: flex;
     flex-direction: row; */
+  display: flex;
+  align-items: center;
 }
 
+.footer__logo-left{
+  display: flex;
+    margin-left: 4%;
+}
+.afisha{
+  margin-left: 25px;
+  width: 105px;
+}
 @media all and (max-width: 960px) {
   .footer {
     display: none;

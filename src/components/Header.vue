@@ -106,6 +106,10 @@ export default {
           name: "Эксперты",
         },
         {
+          link: "/lections",
+          name: "Лекции",
+        },
+        {
           link: "/partners",
           name: "Организаторы",
         },
@@ -294,7 +298,7 @@ export default {
 
   text-transform: uppercase;
   /* font-size: 12px; */
-  font-weight: 400;
+  font-weight: 300;
   cursor: pointer;
   transition: opacity 0.5s;
   text-align: center;
@@ -302,7 +306,8 @@ export default {
 @media(max-width: 1440px){
   .header__menu-link {
     padding: 0;
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 38px;
   }
 }
 @media(max-width: 1250px){

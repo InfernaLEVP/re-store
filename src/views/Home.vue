@@ -26,6 +26,10 @@
               src="../assets/vinzavod_logo.svg"
               alt="Логотип Винзавод"
             />
+            <img
+              src="../assets/Logo-Afisha.png"
+              alt="Логотип Афиша"
+            />
           </div>
           <!-- ./mobile front page logos -->
 
@@ -163,13 +167,14 @@ export default {
 .main-page__logos-mobile{
   display: none;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  margin-top: 25px;
 }
 .main-page__logos-mobile img{
   max-width: 20%;
 }
 .main-page__logos-mobile img:first-child{
-  margin-right: 4rem;
+  margin-right: 0rem;
 }
 @media (max-width: 992px){
   .main-page__logos-mobile{
