@@ -471,6 +471,12 @@ img{
     padding: 15px 60px;
   }
 }
+@media(max-width: 370px){
+  .participants__button a {
+    font-size: 15px;
+    padding: 15px 30px;
+  }
+}
 
 /*  */
 .mobile-controls{

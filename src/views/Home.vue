@@ -35,7 +35,7 @@
 
         </div>
 
-        <router-link to="/gallery" class="main-page__gallery-btn">Галерея</router-link>
+        <router-link to="/gallery" class="main-page__gallery-btn">Нажмите, чтобы начать</router-link>
 
       </section>
 

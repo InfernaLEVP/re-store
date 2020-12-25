@@ -32,7 +32,7 @@
     <!-- ./Swiper -->
 
     <div class="participants__button">
-      <router-link to="/gallery">Галерея</router-link>
+      <router-link to="/gallery">Нажмите, чтобы начать</router-link>
     </div>
 
     <div class="mobile-paginator">

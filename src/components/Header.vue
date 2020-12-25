@@ -79,7 +79,7 @@
       </router-link>
     </div>
     
-    <router-link to="/gallery" class="header__gallery-btn invisible">Галерея</router-link>
+    <router-link to="/gallery" class="header__gallery-btn invisible">Нажмите, чтобы начать</router-link>
   </header>
 </template>
 
@@ -607,6 +607,7 @@ export default {
   .lock .header__gallery-btn {
     display: block;
     margin-top: 0;
+    font-size: 15px;
   }
   .header__menu-burger.active:before {
     top: 4.5px;
